@@ -1,0 +1,51 @@
+Snippets
+
+ May 16 Posts: 21,994 Answer ✓
+
+@Rpiechura - Its markdown, so you can use three ` characters to signal the start and end of a code block.
+
+@GeoJunkie - The cell().data()DT method sounds like what you want. Something like table.cell( this, 0 ).data() will give you the data for the cell in column index 0, for row this.
+
+Allan
+
+
+  
+ 
+
+Got it! The click event needs to point to the row. This code worked:
+	
+$(function() {
+    var opportunityTable = $("#dataTable").DataTable({
+        "ajax" : {
+            "url": "opportunitiesJson.json?json=1",
+            "dataSrc": ""
+        },
+        "deferRender" : true,
+        "columns":[
+            { "data":"id" },
+            { "data":"sponsor" },
+            { "data":"title" },
+            { "data":"deadline" }
+        ],
+        "columnDefs": [
+            { "visible" : false, "targets": [0] }
+        ],
+        "order" : [[ 3, "asc" ]]
+    });
+     
+    $("#dataTable tbody").on('click', 'tr', function () {
+        console.log(opportunityTable.cell( this, 0 ).data());
+    });
+});
+
+Thanks!
+
+
+		[
+			"12",
+			"02.Restaurant.01",
+			"Picasso",
+			"<span id=\"image\" data-index=\"12\" data-videoid=\"GaT8Rp7No2o\"><img src=\"https://lh6.googleusercontent.com/-9lKuJ_zfY8o/U_v9mrVViyI/AAAAAAAACB4/HN7tsDRMl9I/w320-h180-no/02.Restaurant.01.180.jpg\" width=\"320px\" height=\"180px\"  /></span>",
+			"$200",
+			"As a thirteenth time recipient of the AAA Five Diamond Award, Executive Chef Julian Serrano's menu is inspired by the regional cuisine of France and Spain where Pablo Picasso spent much of his life. The restaurant boasts a wine cellar stocked with more than 1,500 selections from the finest European vineyards. Picasso masterpieces, as well as a collection of his charming ceramic pieces, further delight the senses of diners enjoying the Picasso experience."
+		],
