@@ -111,6 +111,7 @@ $(document).ready(function(){
         pagination: false,
         //autoPlay: 6000,
         stopOnHover: true,
+        
         afterAction : syncPosition,
         addClassActive: true,
         responsiveRefreshRate : 200
@@ -136,6 +137,13 @@ $(document).ready(function(){
     //var owl_hotel_2= $('#owl-hotel-2').data('owlCarousel');
     
     function syncPosition(){
+        /*
+        a custom event 'allowPlayerActivation'
+        enables changing the content
+        of each owl-hotel-1-overlay dynamically
+        ----referenced in hotel_youtube.js
+        */
+        $('#owl-hotel-1').trigger('allowPlayerActivation');
 		var current = this.currentItem;
         $('#owl-hotel-1 li div.added-content').remove();
 		$('#owl-hotel-2')
@@ -146,21 +154,6 @@ $(document).ready(function(){
 		if(owl_hotel_2.data('owlCarousel') !== 'undefined'){
             owl_hotel_2.trigger('owl.goTo', current);
 		}
-        
-        
-        //behaviour for recognising status of overlay player
-        $('#owl-hotel-1 li div.owl-hotel-1-slide-overlay-player').each(function(){
-            if($(this).hasClass('player-activated')){
-                $(this).removeClass('player-activated');
-                $(this).html('<button class="play-button">Play Video</button>');
-            }
-        });
-        
-        $('#owl-hotel-1 li div.owl-hotel-1-slide-overlay-player button').each(function(){
-            $(this).click(function(){
-                $(this).parent('div').addClass('player-activated').html('<div id="player"></div>');
-            }); 
-        });
 	}
     
     $('#owl-hotel-2').on('click', '.owl-item', function(e){
