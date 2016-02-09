@@ -22,9 +22,10 @@ $(document).ready(function(){
                 });
                 
                 $('#owl-hotel-1 li div.owl-hotel-1-slide-overlay-player button').each(function(){
+                    var video_id = $(this).parent('div').data('video_id');
                     $(this).click(function(){
-                        $(this).parent('div').addClass('player-activated').html('<div id="player"></div>');
-                    }); 
+                        $(this).parent('div').addClass('player-activated').html('<iframe id="ytplayer" type="text/html" width="100%" height="100%" src="http://www.youtube.com/embed/' + video_id + '?autoplay=1&rel=0&controls=2&origin=http://example.com&rel=0" frameborder="0"/>');
+                    });  
                 });
             });
             
@@ -33,8 +34,9 @@ $(document).ready(function(){
             before a custom event 'allowPlayerActivation' is triggered
             */
             $('#owl-hotel-1 li div.owl-hotel-1-slide-overlay-player button').each(function(){
+                var video_id = $(this).parent('div').data('video_id');
                 $(this).click(function(){
-                    $(this).parent('div').addClass('player-activated').html('<div id="player"></div>');
+                    $(this).parent('div').addClass('player-activated').html('<iframe id="ytplayer" type="text/html" width="100%" height="100%" src="http://www.youtube.com/embed/' + video_id + '?autoplay=1&rel=0&controls=2&origin=http://example.com" frameborder="0"/>');
                 }); 
             }); 
         } else if ($('#owl-hotel-1 li').length = 0){
