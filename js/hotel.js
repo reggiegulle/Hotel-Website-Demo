@@ -102,6 +102,8 @@ $(document).ready(function(){
     
     $('input.form-control.input-sm').val('');
     
+    
+    
     //initialize the upper owl-carousel here
     $('#owl-hotel-1').owlCarousel({
         singleItem : true,
@@ -109,13 +111,17 @@ $(document).ready(function(){
         navigation: true,
 		navigationText: ['&#10092', '&#10093'],
         pagination: false,
-        autoPlay: 6000,
-        stopOnHover: true,
         afterAction : syncPosition,
+        afterMove: logMovement,
         addClassActive: true,
         responsiveRefreshRate : 200
     });
     var owl_hotel_1= $('#owl-hotel-1').data('owlCarousel');
+    
+    function logMovement(){
+        console.log('Slide has moved');
+    }
+    
     
     
     //initialize the bottom owl-carousel here
@@ -222,11 +228,28 @@ $(document).ready(function(){
                     owl_hotel_2.data('owlCarousel').addItem(owl_hotel_2_li_item);
                 }
         });
-        
-		
 	}
 	
     var hoteltable = $('#hoteltable').DataTable();
+    
+    hoteltable.on('draw.dt', function(){
+        if ($('#owl-hotel-1 li').length === 0){
+            $('#owl-hotel-1-container div[id="progressBar"]').remove();
+            var owl_hotel_1_li_item = '<li>';
+            owl_hotel_1_li_item += '<div class="owl-hotel-1-slide no-search-results">';
+            owl_hotel_1_li_item += 'Sorry, no search results found.  Please try again.';
+            owl_hotel_1_li_item += '</div>';
+            owl_hotel_1_li_item += '</li>';
+            owl_hotel_1.addItem(owl_hotel_1_li_item);           
+        } else if ($('#owl-hotel-1 li').length != 0) {
+            $('#owl-hotel-1-container div[id="progressBar"]').remove();
+            var progressBar = '<div id="progressBar">';
+                progressBar += '<div id="bar">';
+                progressBar += '</div>';
+            progressBar += '</div>';
+            $('#owl-hotel-1-container').prepend(progressBar);    
+        }
+    });
     
 	$("#sort-name").change(function(){
         $("#sort-price option:eq(0)").prop('selected', true);

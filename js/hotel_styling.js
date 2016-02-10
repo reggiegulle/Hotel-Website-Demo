@@ -46,8 +46,13 @@ $(document).ready(function(){
                     'background-color': 'rgba(255, 255, 255, 0.5)'
                 }
             );
-            if ($('#owl-hotel-1 li').length < 1){
-                console.log('The list has ' + $('#owl-hotel-1 li').length + ' items');
+            if ($('#owl-hotel-1 li:eq(0) div').hasClass('no-search-results')){
+                $('.owl-hotel-1-slide').css(
+                    {
+                        'background': 'rgba(255, 255, 255, 0.8)',
+                        'height':'auto'                        
+                    }
+                )
             } else {
                 $('.owl-hotel-1-slide').each(function(){
                     var thisImgSrc = $(this).data('imgsrc');
@@ -81,8 +86,13 @@ $(document).ready(function(){
                     'background-color': 'rgba(255, 255, 255, 0.25)'
                 }
             );
-            if ($('#owl-hotel-1 li').length < 1){
-                console.log('The list has ' + $('#owl-hotel-1 li').length + ' items');
+            if ($('#owl-hotel-1 li:eq(0) div').hasClass('no-search-results')){
+                $('.owl-hotel-1-slide').css(
+                    {
+                        'background': 'rgba(255, 255, 255, 0.8)',
+                        'height':'auto'                        
+                    }
+                )
             } else {
                 $('.owl-hotel-1-slide').each(function(){
                     var thisImgSrc = $(this).data('imgsrc');
@@ -125,8 +135,13 @@ $(document).ready(function(){
                             'background-color': 'rgba(255, 255, 255, 0.5)'
                         }
                     );
-                    if ($('#owl-hotel-1 li').length < 1){
-                        console.log('The list has ' + $('#owl-hotel-1 li').length + ' items');
+                    if ($('#owl-hotel-1 li:eq(0) div').hasClass('no-search-results')){
+                        $('.owl-hotel-1-slide').css(
+                            {
+                                'background': 'rgba(255, 255, 255, 0.8)',
+                                'height':'auto'                        
+                            }
+                        )
                     } else {
                          $('.owl-hotel-1-slide').each(function(){
                             var thisImgSrc = $(this).data('imgsrc');
@@ -161,8 +176,13 @@ $(document).ready(function(){
                             'background-color': 'rgba(255, 255, 255, 0.25)'
                         }
                     );
-                    if ($('#owl-hotel-1 li').length < 1){
-                        console.log('The list has ' + $('#owl-hotel-1 li').length + ' items');
+                    if ($('#owl-hotel-1 li:eq(0) div').hasClass('no-search-results')){
+                        $('.owl-hotel-1-slide').css(
+                            {
+                                'background': 'rgba(255, 255, 255, 0.8)',
+                                'height':'auto'                        
+                            }
+                        )
                     } else {
                         $('.owl-hotel-1-slide').each(function(){
                             var thisImgSrc = $(this).data('imgsrc');
