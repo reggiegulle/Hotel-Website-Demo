@@ -109,14 +109,14 @@ $(document).ready(function(){
         navigation: true,
 		navigationText: ['&#10092', '&#10093'],
         pagination: false,
-        //autoPlay: 6000,
+        autoPlay: 6000,
         stopOnHover: true,
-        
         afterAction : syncPosition,
         addClassActive: true,
         responsiveRefreshRate : 200
     });
     var owl_hotel_1= $('#owl-hotel-1').data('owlCarousel');
+    
     
     //initialize the bottom owl-carousel here
     var owl_hotel_2= $('#owl-hotel-2');
