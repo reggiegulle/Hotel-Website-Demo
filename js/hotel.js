@@ -85,8 +85,8 @@ $(document).ready(function(){
                     'targets': -1
                 }
 			],
-		'autoWidth': false,
-		'scrollY': '600px',
+		'autoWidth': true,
+		'scrollY': '600',
 		'paging': false,
 		'info': true,
 		'responsive': {
@@ -94,80 +94,12 @@ $(document).ready(function(){
                         'type': 'column',
                         'target': -1
                     }
-                },
-		'drawCallback': function(settings){
-				populateOwlCarousels();
-			}
+                }
 	});
     
     $('input.form-control.input-sm').val('');
     
     
-    
-    //initialize the upper owl-carousel here
-    $('#owl-hotel-1').owlCarousel({
-        singleItem : true,
-        slideSpeed : 1000,
-        navigation: true,
-		navigationText: ['&#10092', '&#10093'],
-        pagination: false,
-        afterAction : syncPosition,
-        afterMove: logMovement,
-        addClassActive: true,
-        responsiveRefreshRate : 200
-    });
-    var owl_hotel_1= $('#owl-hotel-1').data('owlCarousel');
-    
-    function logMovement(){
-        console.log('Slide has moved');
-    }
-    
-    
-    
-    //initialize the bottom owl-carousel here
-    var owl_hotel_2= $('#owl-hotel-2');
-    owl_hotel_2.owlCarousel({
-        items: 6,
-        itemsDesktop: [1199, 5],
-        itemsDesktopSmall: [979, 4],
-        itemsTablet: [768, 3],
-        itemsMobile: [479, 2],
-        navigation: true,
-        navigationText: ['&#10092', '&#10093'],
-        pagination: false,
-        responsiveRefreshRate : 100,
-		afterInit : function(el){
-			el.find(".owl-item").eq(0).addClass("synced");
-		}
-    });
-    //var owl_hotel_2= $('#owl-hotel-2').data('owlCarousel');
-    
-    function syncPosition(){
-        /*
-        a custom event 'allowPlayerActivation'
-        enables changing the content
-        of each owl-hotel-1-overlay dynamically
-        ----referenced in hotel_youtube.js
-        */
-        $('#owl-hotel-1').trigger('allowPlayerActivation');
-		var current = this.currentItem;
-        $('#owl-hotel-1 li div.added-content').remove();
-		$('#owl-hotel-2')
-			.find('.owl-item')
-			.removeClass('synced')
-			.eq(current)
-			.addClass('synced');
-		if(owl_hotel_2.data('owlCarousel') !== 'undefined'){
-            owl_hotel_2.trigger('owl.goTo', current);
-		}
-	}
-    
-    $('#owl-hotel-2').on('click', '.owl-item', function(e){
-		e.preventDefault();
-		var number = $(this).data('owlItem');
-		$('#owl-hotel-1').trigger('owl.goTo',number);
-        //console.log('The owl-1 item synced is at index ' + number)
-	});  
     
     //explicitly set the sort and filter select options
     //for Mozilla Firefox
@@ -232,24 +164,7 @@ $(document).ready(function(){
 	
     var hoteltable = $('#hoteltable').DataTable();
     
-    hoteltable.on('draw.dt', function(){
-        if ($('#owl-hotel-1 li').length === 0){
-            $('#owl-hotel-1-container div[id="progressBar"]').remove();
-            var owl_hotel_1_li_item = '<li>';
-            owl_hotel_1_li_item += '<div class="owl-hotel-1-slide no-search-results">';
-            owl_hotel_1_li_item += 'Sorry, no search results found.  Please try again.';
-            owl_hotel_1_li_item += '</div>';
-            owl_hotel_1_li_item += '</li>';
-            owl_hotel_1.addItem(owl_hotel_1_li_item);           
-        } else if ($('#owl-hotel-1 li').length != 0) {
-            $('#owl-hotel-1-container div[id="progressBar"]').remove();
-            var progressBar = '<div id="progressBar">';
-                progressBar += '<div id="bar">';
-                progressBar += '</div>';
-            progressBar += '</div>';
-            $('#owl-hotel-1-container').prepend(progressBar);    
-        }
-    });
+   
     
 	$("#sort-name").change(function(){
         $("#sort-price option:eq(0)").prop('selected', true);
