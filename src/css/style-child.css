@@ -126,37 +126,10 @@
   width: 100%;
   background: #EDEDED;
 }
-.owl-theme .owl-controls {
-  margin-top: 0;
-}
-#owl-hotel-1.owl-theme .owl-controls .owl-buttons div,
-#owl-hotel-2.owl-theme .owl-controls .owl-buttons div {
-  position: absolute;
-  top: 40%;
-  font-size: 28px;
-  z-index: 400;
-}
-#owl-hotel-1.owl-theme .owl-controls .owl-buttons div.owl-prev {
-  left: 0;
-}
-#owl-hotel-1.owl-theme .owl-controls .owl-buttons div.owl-next {
-  right: 0;
-}
-#owl-hotel-2.owl-theme .owl-controls .owl-buttons div {
-  top: 50%;
-  font-size: 14px;
-  z-index: 3;
-}
-#owl-hotel-2.owl-theme .owl-controls .owl-buttons div.owl-prev {
-  left: 0;
-}
-#owl-hotel-2.owl-theme .owl-controls .owl-buttons div.owl-next {
-  right: 0;
-}
-.owl-hotel-1-slide {
+.hotel-1-slide {
   position: relative;
 }
-.owl-hotel-1-slide .owl-hotel-1-slide-overlay-player {
+.hotel-1-slide .hotel-1-slide-overlay-player {
   position: absolute;
   width: 100%;
   z-index: 4;

@@ -18,26 +18,33 @@ $(document).ready(function(){
     //variable for the table element
     var hoteltable = $('#hoteltable').DataTable();
     
-    /* events to be triggered
-    when the "hotel" table is rendered*/
-    /*hoteltable.on('draw.dt', function(){
+    /* 
+    events to be triggered
+    when the "hotel" table is rendered
+    */
+    hoteltable.on('draw.dt', function(){
         //establish the height of the slide div
         //and the slide div's overlay
         //on table render
-        /*if ($(window).width() > 640){
+        if ($(window).width() > 640){
+            /*
             if window width is greater than 640 pixels
             then the width:height ratio is around 3:1
-            $('.owl-hotel-1-slide').css(
+            */
+            $('.hotel-1-slide').css(
                 {
-                    'height': ($('.owl-hotel-1-slide').width()/3.047619047619048) + 'px'
+                    'height': ($('.hotel-1-slide').width()/3.047619047619048) + 'px'
                 }
 
             );
+            
+            /*
             if window width is greater than 640 pixels
             make the overlay occupy only about half
             of the area of the slide div
             with slight margins
-            $('.owl-hotel-1-slide-overlay-player').css(
+            
+            $('.hotel-1-slide-overlay-player').css(
                 {
                     'width': (($('.owl-hotel-1-slide').width()/2) - 10) + 'px',
                     'height': (($('.owl-hotel-1-slide').width()/3.047619047619048) - 10) + 'px',
@@ -63,9 +70,9 @@ $(document).ready(function(){
                         }
                     );
                 });
-            }
+            }*/
             
-        } else if ($(window).width() <= 640) {
+        } /*else if ($(window).width() <= 640) {
             if window width is less than or equal to 640 pixels
             then the width:height ratio is around 1.75:1
             $('.owl-hotel-1-slide').css(
@@ -198,7 +205,7 @@ $(document).ready(function(){
                 }
                 
             }, 500, 'owl-hotel-1-slide-resize');
-        });
-    });*/
+        });*/
+    });
 
 });
