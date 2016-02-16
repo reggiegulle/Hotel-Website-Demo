@@ -118,17 +118,24 @@
 	height: auto;
 }
 
-//styles for owl-carousel-1
+//styles for bxslider controls
+@images: "../images";
 
-#bar{
-    width: 0%;
-    max-width: 100%;
-    height: 4px;
-    background: #7fc242;
+.bx-wrapper{
+    .bx-prev{
+        background: url('@{images}/controls.png') no-repeat 0 -32px;
+    }
+    .bx-next{
+        background: url('@{images}/controls.png') no-repeat -43px -32px;
+    }
 }
-#progressBar{
+
+//styles for hotel-1-bxslider
+
+#progressLine{
+    background: #fff;
+    height: 4px;
     width: 100%;
-    background: #EDEDED;
 }
 
 .hotel-1-slide{
@@ -136,6 +143,8 @@
     
     .hotel-1-slide-overlay-player{
         position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         z-index: 4;
     }

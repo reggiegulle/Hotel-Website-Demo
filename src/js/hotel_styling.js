@@ -46,22 +46,22 @@ $(document).ready(function(){
             
             $('.hotel-1-slide-overlay-player').css(
                 {
-                    'width': (($('.owl-hotel-1-slide').width()/2) - 10) + 'px',
-                    'height': (($('.owl-hotel-1-slide').width()/3.047619047619048) - 10) + 'px',
+                    'width': (($('.hotel-1-slide').width()/2) - 10) + 'px',
+                    'height': (($('.hotel-1-slide').width()/3.047619047619048) - 10) + 'px',
                     'top': '5px',
                     'right': '5px',
                     'background-color': 'rgba(255, 255, 255, 0.5)'
                 }
             );
             if ($('#owl-hotel-1 li:eq(0) div').hasClass('no-search-results')){
-                $('.owl-hotel-1-slide').css(
+                $('.hotel-1-slide').css(
                     {
                         'background': 'rgba(255, 255, 255, 0.8)',
                         'height':'auto'                        
                     }
                 )
             } else {
-                $('.owl-hotel-1-slide').each(function(){
+                $('.hotel-1-slide').each(function(){
                     var thisImgSrc = $(this).data('imgsrc');
                     $(this).css(
                         {
@@ -72,36 +72,39 @@ $(document).ready(function(){
                 });
             }*/
             
-        } /*else if ($(window).width() <= 640) {
+        } else if ($(window).width() <= 640) {
+            /*
             if window width is less than or equal to 640 pixels
             then the width:height ratio is around 1.75:1
-            $('.owl-hotel-1-slide').css(
+            */
+            $('.hotel-1-slide').css(
                 {
-                    'height': ($('.owl-hotel-1-slide').width()/1.777777777778) + 'px'
+                    'height': ($('.hotel-1-slide').width()/1.777777777778) + 'px'
                 }
 
             );
+            /*
             if window width is less than or equal to 640 pixels
             make the overlay occupy
             the whole slide div area
-            $('.owl-hotel-1-slide-overlay-player').css(
+            $('.hotel-1-slide-overlay-player').css(
                 {
-                    'width': $('.owl-hotel-1-slide').width() + 'px',
-                    'height': ($('.owl-hotel-1-slide').width()/1.777777777778) + 'px',
+                    'width': $('.hotel-1-slide').width() + 'px',
+                    'height': ($('.hotel-1-slide').width()/1.777777777778) + 'px',
                     'top': '0px',
                     'right': '0px',
                     'background-color': 'rgba(255, 255, 255, 0.25)'
                 }
             );
             if ($('#owl-hotel-1 li:eq(0) div').hasClass('no-search-results')){
-                $('.owl-hotel-1-slide').css(
+                $('.hotel-1-slide').css(
                     {
                         'background': 'rgba(255, 255, 255, 0.8)',
                         'height':'auto'                        
                     }
                 )
             } else {
-                $('.owl-hotel-1-slide').each(function(){
+                $('.hotel-1-slide').each(function(){
                     var thisImgSrc = $(this).data('imgsrc');
                     $(this).css(
                         {
@@ -110,47 +113,52 @@ $(document).ready(function(){
                         }
                     );
                 });
-            }
+            }*/
         }
        
         
         //establish the height of the slide div
         //and the slide div's overlay
         //on browser resize
-       /* $(window).resize(function(){
+        $(window).resize(function(){
             waitForFinalEvent(function(){
                 if ($(window).width() > 640){
+                    /*
                     on browser resize,
                     if window width is greater than 640 pixels
                     then the width:height ratio is around 3:1
-                    $('.owl-hotel-1-slide').css(
+                    */
+                    $('.hotel-1-slide').css(
                         {
-                            'height': ($('.owl-hotel-1-slide').width()/3.047619047619048) + 'px'
+                            'height': ($('.hotel-1-slide').width()/3.047619047619048) + 'px'
                         }
                     );
-                    on browser resize,
+                    
+                    
+                    /*on browser resize,
                     if window width is greater than 640 pixels
                     make the overlay occupy only about half
                     of the area of the slide div
                     with slight margins
-                    $('.owl-hotel-1-slide-overlay-player').css(
+                    
+                    $('.hotel-1-slide-overlay-player').css(
                         {
-                            'width': (($('.owl-hotel-1-slide').width()/2) - 10) + 'px',
-                            'height': (($('.owl-hotel-1-slide').width()/3.047619047619048) - 10) + 'px',
+                            'width': (($('.hotel-1-slide').width()/2) - 10) + 'px',
+                            'height': (($('.hotel-1-slide').width()/3.047619047619048) - 10) + 'px',
                             'top': '5px',
                             'right': '5px',
                             'background-color': 'rgba(255, 255, 255, 0.5)'
                         }
                     );
                     if ($('#owl-hotel-1 li:eq(0) div').hasClass('no-search-results')){
-                        $('.owl-hotel-1-slide').css(
+                        $('.hotel-1-slide').css(
                             {
                                 'background': 'rgba(255, 255, 255, 0.8)',
                                 'height':'auto'                        
                             }
                         )
                     } else {
-                         $('.owl-hotel-1-slide').each(function(){
+                         $('.hotel-1-slide').each(function(){
                             var thisImgSrc = $(this).data('imgsrc');
                             $(this).css(
                                 {
@@ -159,39 +167,43 @@ $(document).ready(function(){
                                 }
                             );
                         });
-                    }
+                    }*/
                 } else if ($(window).width() <= 640) {
+                    /*
                     on browser resize,
                     if window width is less than or equal to 640 pixels
                     then the width:height ratio is around 1.75:1
-                    $('.owl-hotel-1-slide').css(
+                    */
+                    $('.hotel-1-slide').css(
                         {
-                            'height': ($('.owl-hotel-1-slide').width()/1.777777777778) + 'px'
+                            'height': ($('.hotel-1-slide').width()/1.777777777778) + 'px'
                         }
 
                     );
+                    
+                    /*
                     on browser resize,
                     if window width is less than or equal to 640 pixels
                     make the overlay occupy
                     the whole slide div area 
-                    $('.owl-hotel-1-slide-overlay-player').css(
+                    $('.hotel-1-slide-overlay-player').css(
                         {
-                            'width': $('.owl-hotel-1-slide').width() + 'px',
-                            'height': ($('.owl-hotel-1-slide').width()/1.777777777778) + 'px',
+                            'width': $('.hotel-1-slide').width() + 'px',
+                            'height': ($('.hotel-1-slide').width()/1.777777777778) + 'px',
                             'top': '0px',
                             'right': '0px',
                             'background-color': 'rgba(255, 255, 255, 0.25)'
                         }
                     );
                     if ($('#owl-hotel-1 li:eq(0) div').hasClass('no-search-results')){
-                        $('.owl-hotel-1-slide').css(
+                        $('.hotel-1-slide').css(
                             {
                                 'background': 'rgba(255, 255, 255, 0.8)',
                                 'height':'auto'                        
                             }
                         )
                     } else {
-                        $('.owl-hotel-1-slide').each(function(){
+                        $('.hotel-1-slide').each(function(){
                             var thisImgSrc = $(this).data('imgsrc');
                             $(this).css(
                                 {
@@ -201,11 +213,11 @@ $(document).ready(function(){
                             );
                         });
                     }
-                    
+                */    
                 }
                 
             }, 500, 'owl-hotel-1-slide-resize');
-        });*/
+        });
     });
 
 });

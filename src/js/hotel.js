@@ -120,7 +120,26 @@ $(document).ready(function(){
     $("#sort-name option:eq(0)").prop('selected', true);
     $("#sort-price option:eq(0)").prop('selected', true);
     $("#category-filter option:eq(0)").prop('selected', true);
-
+    
+    
+    
+         /*
+        START
+        function for building
+        the progress Bar 
+        and determining its behaviour
+        */
+        
+        
+        
+       
+        /*
+        END
+        function for building
+        the progress Bar 
+        and determining its behaviour
+        */
+ 
 	
     /*
     function that executes
@@ -128,6 +147,13 @@ $(document).ready(function(){
     of the "hoteltable" table element
     */
     function populateBxSliders(){
+        
+         var line = new ProgressBar.Line('#progressLine',{
+                duration: 8000,
+                strokeWidth: $('#progressLine').width()/100,
+                color: '#7fc242'
+            });
+        
 		var hoteltable = $('#hoteltable').DataTable();
                    
         //remove items from upper bxslider ("ul hotel-1")
@@ -148,6 +174,8 @@ $(document).ready(function(){
         populate hotel-1 bxslider
         */
         if ($(window).width() > 640) {
+            
+           
                       
             $('#hoteltable tbody tr').each(function(){
                 var thisRow = $(this);
@@ -161,6 +189,8 @@ $(document).ready(function(){
                         hotel_1_li_item += '<div class="hotel-1-slide" data-video_id="' + rowData.image.video_id + '">';
                         //use the "medium" jpg for screen sizes above 640px
                             hotel_1_li_item += '<img src="images/' + rowData.image.src + '-medium.jpg" width="100%" height="100%" />';
+                            hotel_1_li_item += '<div class="hotel-1-slide-overlay-player">';
+                            hotel_1_li_item += '</div>';
                         hotel_1_li_item += '</div>';
                     hotel_1_li_item += '</li>';
                     $('#hotel-1').append(hotel_1_li_item);
@@ -168,7 +198,25 @@ $(document).ready(function(){
             });
             
             //reload the bxslider
-            bxslider_hotel_1.reloadSlider();
+            bxslider_hotel_1.reloadSlider({
+                mode: 'fade',
+                pager: false,
+                controls: true,
+                pause: 7000,
+                speed: 1500,
+                auto: true,
+                onSliderLoad: function(){
+                        line.set(0);
+                        line.animate(1.0);
+                     },
+                'onSlideAfter': function(){
+    line.set(1.0);
+ },
+ 'onSlideBefore': function(){
+  line.set(0);
+ line.animate(1.0);
+ }
+            });
             
         } else if ($(window).width() <= 640) {
             
@@ -184,14 +232,19 @@ $(document).ready(function(){
                         hotel_1_li_item += '<div class="hotel-1-slide" data-video_id="' + rowData.image.video_id + '">';
                         //use the "mobile" jpg for screen sizes equal to or less than 640px
                             hotel_1_li_item += '<img src="images/' + rowData.image.src + '-mobile.jpg" width="100%" height="100%" />';
+                            hotel_1_li_item += '<div class="hotel-1-slide-overlay-player">';
+                            hotel_1_li_item += '</div>';
                         hotel_1_li_item += '</div>';
                     hotel_1_li_item += '</li>';
                     $('#hotel-1').append(hotel_1_li_item);
                 }
             });
             
-            //reload the bxslider
-            bxslider_hotel_1.reloadSlider();
+            //reload hotel-1 bxslider
+            bxslider_hotel_1.reloadSlider({
+                mode: 'fade',
+                pager: false
+            });
         }
         
         /*
@@ -218,7 +271,7 @@ $(document).ready(function(){
             }
         });
         
-        //reload the bxslider
+        //reload hotel-2 bxslider
         bxslider_hotel_2.reloadSlider({
             minSlides: 2,
             maxSlides: 6,
@@ -260,14 +313,19 @@ $(document).ready(function(){
                                 hotel_1_li_item += '<div class="hotel-1-slide" data-video_id="' + rowData.image.video_id + '">';
                                 //use the "medium" jpg for screen sizes above 640px
                                     hotel_1_li_item += '<img src="images/' + rowData.image.src + '-medium.jpg" width="100%" height="100%" />';
+                                    hotel_1_li_item += '<div class="hotel-1-slide-overlay-player">';
+                                    hotel_1_li_item += '</div>';
                                 hotel_1_li_item += '</div>';
                             hotel_1_li_item += '</li>';
                             $('#hotel-1').append(hotel_1_li_item);
                         }
                     });
             
-                //reload the bxslider
-                bxslider_hotel_1.reloadSlider();
+                    //reload hotel-1 bxslider
+                    bxslider_hotel_1.reloadSlider({
+                        mode: 'fade',
+                        pager: false
+                    });
                    
                 } else if ($(window).width() <= 640) {
                     
@@ -289,14 +347,19 @@ $(document).ready(function(){
                                 hotel_1_li_item += '<div class="hotel-1-slide" data-video_id="' + rowData.image.video_id + '">';
                                 //use the "mobile" jpg for screen sizes equal to or less than 640px
                                     hotel_1_li_item += '<img src="images/' + rowData.image.src + '-mobile.jpg" width="100%" height="100%" />';
+                                    hotel_1_li_item += '<div class="hotel-1-slide-overlay-player">';
+                                    hotel_1_li_item += '</div>';
                                 hotel_1_li_item += '</div>';
                             hotel_1_li_item += '</li>';
                             $('#hotel-1').append(hotel_1_li_item);
                         }
                     });
             
-                //reload the bxslider
-                bxslider_hotel_1.reloadSlider(); 
+                    //reload hotel-1 bxslider
+                    bxslider_hotel_1.reloadSlider({
+                        mode: 'fade',
+                        pager: false
+                    }); 
                     
                 }
             }, 500, 'hotel-1-slide-resize');
