@@ -130,7 +130,7 @@ $(document).ready(function(){
         and determining its behaviour
         */
         
-        
+         var timer;
         
        
         /*
@@ -147,12 +147,6 @@ $(document).ready(function(){
     of the "hoteltable" table element
     */
     function populateBxSliders(){
-        
-         var line = new ProgressBar.Line('#progressLine',{
-                duration: 8000,
-                strokeWidth: $('#progressLine').width()/100,
-                color: '#7fc242'
-            });
         
 		var hoteltable = $('#hoteltable').DataTable();
                    
@@ -171,81 +165,36 @@ $(document).ready(function(){
         var rowData;
         
         /*
-        populate hotel-1 bxslider
+        START
+        behaviour of progressBar
         */
-        if ($(window).width() > 640) {
+        
+        var time = 7,
+        lengIncrement = 0,
+        tick;
+    
+        
+        
+        function doIncrement(){
+            clearInterval(tick);
+            tick = setInterval(barIncrement, 1000);
             
-           
-                      
-            $('#hoteltable tbody tr').each(function(){
-                var thisRow = $(this);
-                //get the data (json data source) from each row
-                rowData = hoteltable.row(thisRow).data();
-                
-                //add the relevant data to bxslider hotel-1
-                //one list item at a time
-                if (typeof(rowData) != 'undefined'){
-                    var hotel_1_li_item = '<li>';
-                        hotel_1_li_item += '<div class="hotel-1-slide" data-video_id="' + rowData.image.video_id + '">';
-                        //use the "medium" jpg for screen sizes above 640px
-                            hotel_1_li_item += '<img src="images/' + rowData.image.src + '-medium.jpg" width="100%" height="100%" />';
-                            hotel_1_li_item += '<div class="hotel-1-slide-overlay-player">';
-                            hotel_1_li_item += '</div>';
-                        hotel_1_li_item += '</div>';
-                    hotel_1_li_item += '</li>';
-                    $('#hotel-1').append(hotel_1_li_item);
-                }
-            });
-            
-            //reload the bxslider
-            bxslider_hotel_1.reloadSlider({
-                mode: 'fade',
-                pager: false,
-                controls: true,
-                pause: 7000,
-                speed: 1500,
-                auto: true,
-                onSliderLoad: function(){
-                        line.set(0);
-                        line.animate(1.0);
-                     },
-                'onSlideAfter': function(){
-    line.set(1.0);
- },
- 'onSlideBefore': function(){
-  line.set(0);
- line.animate(1.0);
- }
-            });
-            
-        } else if ($(window).width() <= 640) {
-            
-            $('#hoteltable tbody tr').each(function(){
-                var thisRow = $(this);
-                //get the data (json data source) from each row
-                rowData = hoteltable.row(thisRow).data();
-                
-                //add the relevant data to bxslider hotel-1
-                //one list item at a time
-                if (typeof(rowData) != 'undefined'){
-                    var hotel_1_li_item = '<li>';
-                        hotel_1_li_item += '<div class="hotel-1-slide" data-video_id="' + rowData.image.video_id + '">';
-                        //use the "mobile" jpg for screen sizes equal to or less than 640px
-                            hotel_1_li_item += '<img src="images/' + rowData.image.src + '-mobile.jpg" width="100%" height="100%" />';
-                            hotel_1_li_item += '<div class="hotel-1-slide-overlay-player">';
-                            hotel_1_li_item += '</div>';
-                        hotel_1_li_item += '</div>';
-                    hotel_1_li_item += '</li>';
-                    $('#hotel-1').append(hotel_1_li_item);
-                }
-            });
-            
-            //reload hotel-1 bxslider
-            bxslider_hotel_1.reloadSlider({
-                mode: 'fade',
-                pager: false
-            });
         }
+        
+        function barIncrement(){
+            
+            lengIncrement += 1; 
+            console.log('The length Increment is: ' + lengIncrement);
+        }
+        
+        $('#hotel-1').on('slideMoved', function(){
+           console.log('Slide has moved'); 
+        });
+        
+        /*
+        END
+        behaviour of progressBar
+        */
         
         /*
         populate hotel-2 bxslider
@@ -280,6 +229,78 @@ $(document).ready(function(){
             moveSlides: 1,
             pager: false
         });
+        
+        
+        
+       
+        
+        /*
+        populate hotel-1 bxslider
+        */
+        if ($(window).width() > 640) {
+            
+           
+                      
+            $('#hoteltable tbody tr').each(function(){
+                var thisRow = $(this);
+                //get the data (json data source) from each row
+                rowData = hoteltable.row(thisRow).data();
+                
+                //add the relevant data to bxslider hotel-1
+                //one list item at a time
+                if (typeof(rowData) != 'undefined'){
+                    var hotel_1_li_item = '<li>';
+                        hotel_1_li_item += '<div class="hotel-1-slide" data-video_id="' + rowData.image.video_id + '">';
+                        //use the "medium" jpg for screen sizes above 640px
+                            hotel_1_li_item += '<img src="images/' + rowData.image.src + '-medium.jpg" width="100%" height="100%" />';
+                            hotel_1_li_item += '<div class="hotel-1-slide-overlay-player">';
+                            hotel_1_li_item += '</div>';
+                        hotel_1_li_item += '</div>';
+                    hotel_1_li_item += '</li>';
+                    $('#hotel-1').append(hotel_1_li_item);
+                }
+            });
+            
+            //reload the bxslider
+            bxslider_hotel_1.reloadSlider({
+                mode: 'fade',
+                pager: false,
+                onSlideAfter: function(){
+                    $('#hotel-1').trigger('slideMoved');
+                }                
+            });
+            
+            
+        } else if ($(window).width() <= 640) {
+            
+            $('#hoteltable tbody tr').each(function(){
+                var thisRow = $(this);
+                //get the data (json data source) from each row
+                rowData = hoteltable.row(thisRow).data();
+                
+                //add the relevant data to bxslider hotel-1
+                //one list item at a time
+                if (typeof(rowData) != 'undefined'){
+                    var hotel_1_li_item = '<li>';
+                        hotel_1_li_item += '<div class="hotel-1-slide" data-video_id="' + rowData.image.video_id + '">';
+                        //use the "mobile" jpg for screen sizes equal to or less than 640px
+                            hotel_1_li_item += '<img src="images/' + rowData.image.src + '-mobile.jpg" width="100%" height="100%" />';
+                            hotel_1_li_item += '<div class="hotel-1-slide-overlay-player">';
+                            hotel_1_li_item += '</div>';
+                        hotel_1_li_item += '</div>';
+                    hotel_1_li_item += '</li>';
+                    $('#hotel-1').append(hotel_1_li_item);
+                }
+            });
+            
+            //reload hotel-1 bxslider
+            bxslider_hotel_1.reloadSlider({
+                mode: 'fade',
+                pager: false
+            });
+        }
+        
+       
         
         
         

@@ -77,7 +77,6 @@ module.exports = function(grunt) {
                 {src:'bower_components/bootstrap/dist/js/bootstrap.js' , dest: 'src/js/bootstrap.js'},
                 {src:'bower_components/datatables.net/js/jquery.dataTables.js', dest: 'src/js/jquery.dataTables.js'},
                 {src:'bower_components/datatables.net-responsive/js/datatables.responsive.js', dest: 'src/js/dataTables.responsive.js'},
-                {src:'bower_components/progressbar.js/dist/progressbar.js', dest: 'src/js/progressbar.js'},
                 {src:'bower_components/bxslider-4/dist/jquery.bxslider.js', dest: 'src/js/jquery.bxslider.js'}
             ]    
         }   
