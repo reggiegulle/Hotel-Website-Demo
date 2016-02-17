@@ -32,8 +32,21 @@ $(document).ready(function(){
     */
     hoteltable.on('draw.dt', function(){
         
-      
+        //set an empty variable
+        //later to be assigned
+        //the index of hotel-1 current slide
+        var currentHotel1Slide;
         
+        //set an empty variable
+        //later to be assigned
+        //the index of hotel-1 current slide
+        //before resize
+        var hotel1SlideBeforeResize;
+        
+        //set an empty variable
+        //later to be assigned
+        //the data of each
+        //individual row of the hoteltable
         var rowData;
         
         /*
@@ -71,6 +84,11 @@ $(document).ready(function(){
                         $('#hotel-1').slick('slickAdd', hotel_1_li_item, false);
                     }
                 });
+                
+                currentHotelSlide = $('#hotel-1').slick('slickCurrentSlide');
+                
+                
+                
             } else {
                 //put error slide
             }
@@ -105,6 +123,10 @@ $(document).ready(function(){
                     }
                 });
                 
+                currentHotelSlide = $('#hotel-1').slick('slickCurrentSlide');
+                
+            
+                
             } else {
                 //put error slide
             }
@@ -124,6 +146,11 @@ $(document).ready(function(){
                     //on browser resize,
                     //window width is greater than 640px
                     if ($('#hoteltable tbody tr td.dataTables_empty').length < 1){
+                        
+                        //get the index of
+                        //the currently loaded slide
+                        //before browser resize
+                        hotel1SlideBeforeResize = $('#hotel-1').slick('slickCurrentSlide');
                         
                         //remove hotel-1 slick carousel items
                         //to refresh the list
@@ -150,6 +177,13 @@ $(document).ready(function(){
                                 $('#hotel-1').slick('slickAdd', hotel_1_li_item, false);
                             }
                         });
+                        
+                        //instantly go to the slide
+                        //that was active
+                        //before the resize
+                        if (hotel1SlideBeforeResize != 0){
+                            $('#hotel-1').slick('slickGoTo', hotel1SlideBeforeResize, true);
+                        }
                     } else {
                         //put error slide
                     } 
@@ -157,6 +191,11 @@ $(document).ready(function(){
                     //on browser resize,
                     //window width is <= 640px
                     if ($('#hoteltable tbody tr td.dataTables_empty').length < 1){
+                        
+                        //get the index of
+                        //the currently loaded slide
+                        //before browser resize
+                        hotel1SlideBeforeResize = $('#hotel-1').slick('slickCurrentSlide');
                         
                         //remove hotel-1 slick carousel items
                         //to refresh the list
@@ -183,6 +222,14 @@ $(document).ready(function(){
                                 $('#hotel-1').slick('slickAdd', hotel_1_li_item, false);
                             }
                         });
+                        
+                        //instantly go to the slide
+                        //that was active
+                        //before the resize
+                        if (hotel1SlideBeforeResize != 0){
+                            $('#hotel-1').slick('slickGoTo', hotel1SlideBeforeResize, true);
+                        }
+                        
                     } else {
                         //put error slide
                     } 
