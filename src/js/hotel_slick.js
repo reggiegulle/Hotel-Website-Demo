@@ -23,14 +23,67 @@ $(document).ready(function(){
     
     //initialize hotel-1 slick slider
     $('#hotel-1').slick({
-        slide: 'li'
+        slide: 'li',
+        fade: true
     });
+    
+    /*
+    * START
+    * variables and behaviours
+    * of the progress bar
+    */
 
+    var time = 5, 
+        percentTime,
+        tick;
+
+    function doProgressBar(){
+        percentTime = 0;
+        tick = setInterval(incrementBarLength, 10);
+    }
+
+    function incrementBarLength(){
+        percentTime += 1/time;
+        $('#progressBar').css({
+            width: percentTime + '%' 
+        });
+        if (percentTime >= 100){
+            clearAllIntervals();
+            $('#hotel-1').slick('slickNext');
+        }
+    }
+
+    function slideMoved(){
+        clearAllIntervals();
+    }
+    
+    //very hacky
+    //brute force code
+    //from "http://www.sitepoint.com/clear-setinterval-knowing-id/"
+    function clearAllIntervals(){
+        for(i=0; i<100; i++){
+            window.clearInterval(i);
+        }
+    }
+
+    /*
+    * END
+    * variables and behaviours
+    * of the progress bar
+    */
+    
     
     /*
      *BEGIN action on every table re-draw
     */
     hoteltable.on('draw.dt', function(){
+        
+        //very hacky
+        //brute force code
+        //from "http://www.sitepoint.com/clear-setinterval-knowing-id/"
+        for(i=0; i<100; i++){
+            window.clearInterval(i);
+        }
         
         //set an empty variable
         //later to be assigned
@@ -48,6 +101,8 @@ $(document).ready(function(){
         //the data of each
         //individual row of the hoteltable
         var rowData;
+        
+       
         
         /*
         * on initial load of table,
@@ -87,7 +142,12 @@ $(document).ready(function(){
                 
                 currentHotelSlide = $('#hotel-1').slick('slickCurrentSlide');
                 
+                doProgressBar();
                 
+                $('#hotel-1').on('afterChange', function(event, slick, currentSlide){
+                    slideMoved();
+                    doProgressBar();
+                });
                 
             } else {
                 //put error slide
@@ -125,8 +185,13 @@ $(document).ready(function(){
                 
                 currentHotelSlide = $('#hotel-1').slick('slickCurrentSlide');
                 
-            
+                doProgressBar();
                 
+                $('#hotel-1').on('afterChange', function(event, slick, currentSlide){
+                    slideMoved();
+                    doProgressBar();
+                });
+    
             } else {
                 //put error slide
             }
@@ -139,6 +204,7 @@ $(document).ready(function(){
         */
         
         $(window).resize(function(){
+            
             waitForFinalEvent(function(){
                 
                 
@@ -183,6 +249,10 @@ $(document).ready(function(){
                         //before the resize
                         if (hotel1SlideBeforeResize != 0){
                             $('#hotel-1').slick('slickGoTo', hotel1SlideBeforeResize, true);
+                            slideMoved();
+                            doProgressBar();
+                        } else {
+                            doProgressBar();
                         }
                     } else {
                         //put error slide
@@ -228,6 +298,10 @@ $(document).ready(function(){
                         //before the resize
                         if (hotel1SlideBeforeResize != 0){
                             $('#hotel-1').slick('slickGoTo', hotel1SlideBeforeResize, true);
+                            slideMoved();
+                            doProgressBar();
+                        } else {
+                            doProgressBar();
                         }
                         
                     } else {
@@ -235,6 +309,8 @@ $(document).ready(function(){
                     } 
                 }
             }, 500, 'slickResize');
+            
+            
         });
 
     });
