@@ -179,8 +179,14 @@ $(document).ready(function(){
                 doProgressBar();
                 
                 $('#hotel-1').on('afterChange', function(event, slick, currentSlide){
+                    if ($('.hotel-1-slide-overlay-player.player-activated').length > 0){
+                        $('.hotel-1-slide-overlay-player.player-activated').contents().replaceWith('<button class="play-button">Play Video</button>');
+                        $('.hotel-1-slide-overlay-player.player-activated').removeClass('player-activated');
+                    }
                     slideMoved();
                     doProgressBar();
+                    
+                    playBtnAction();
                 });
                 
             } else {
@@ -225,8 +231,14 @@ $(document).ready(function(){
                 doProgressBar();
                 
                 $('#hotel-1').on('afterChange', function(event, slick, currentSlide){
+                    if ($('.hotel-1-slide-overlay-player.player-activated').length > 0){
+                        $('.hotel-1-slide-overlay-player.player-activated').contents().replaceWith('<button class="play-button">Play Video</button>');
+                        $('.hotel-1-slide-overlay-player.player-activated').removeClass('player-activated');
+                    }
                     slideMoved();
                     doProgressBar();
+                    
+                    playBtnAction();
                 });
     
             } else {
@@ -291,8 +303,32 @@ $(document).ready(function(){
                             $('#hotel-1').slick('slickGoTo', hotel1SlideBeforeResize, true);
                             slideMoved();
                             doProgressBar();
+                            playBtnAction();
+                            
+                            $('#hotel-1').on('afterChange', function(event, slick, currentSlide){
+                                if ($('.hotel-1-slide-overlay-player.player-activated').length > 0){
+                                    $('.hotel-1-slide-overlay-player.player-activated').contents().replaceWith('<button class="play-button">Play Video</button>');
+                                    $('.hotel-1-slide-overlay-player.player-activated').removeClass('player-activated');
+                                }
+                                slideMoved();
+                                doProgressBar();
+
+                                playBtnAction();
+                            });
                         } else {
                             doProgressBar();
+                            playBtnAction();
+                            
+                            $('#hotel-1').on('afterChange', function(event, slick, currentSlide){
+                                if ($('.hotel-1-slide-overlay-player.player-activated').length > 0){
+                                    $('.hotel-1-slide-overlay-player.player-activated').contents().replaceWith('<button class="play-button">Play Video</button>');
+                                    $('.hotel-1-slide-overlay-player.player-activated').removeClass('player-activated');
+                                }
+                                slideMoved();
+                                doProgressBar();
+
+                                playBtnAction();
+                            });
                         }
                     } else {
                         //put error slide
@@ -343,8 +379,32 @@ $(document).ready(function(){
                             $('#hotel-1').slick('slickGoTo', hotel1SlideBeforeResize, true);
                             slideMoved();
                             doProgressBar();
+                            playBtnAction();
+                            
+                            $('#hotel-1').on('afterChange', function(event, slick, currentSlide){
+                                if ($('.hotel-1-slide-overlay-player.player-activated').length > 0){
+                                    $('.hotel-1-slide-overlay-player.player-activated').contents().replaceWith('<button class="play-button">Play Video</button>');
+                                    $('.hotel-1-slide-overlay-player.player-activated').removeClass('player-activated');
+                                }
+                                slideMoved();
+                                doProgressBar();
+
+                                playBtnAction();
+                            });
                         } else {
                             doProgressBar();
+                            playBtnAction();
+                            
+                            $('#hotel-1').on('afterChange', function(event, slick, currentSlide){
+                                if ($('.hotel-1-slide-overlay-player.player-activated').length > 0){
+                                    $('.hotel-1-slide-overlay-player.player-activated').contents().replaceWith('<button class="play-button">Play Video</button>');
+                                    $('.hotel-1-slide-overlay-player.player-activated').removeClass('player-activated');
+                                }
+                                slideMoved();
+                                doProgressBar();
+
+                                playBtnAction();
+                            });
                         }
                         
                     } else {
@@ -353,8 +413,40 @@ $(document).ready(function(){
                 }
             }, 500, 'slickResize');
             
-            
         });
+        
+        /*
+        * START
+        * behaviour of play button
+        * on the player area
+        * of each slide
+        */
+        
+        var playBtnAction = (function(){
+            return function(){
+                $('#hotel-1 .play-button').each(function(){
+                    var playButton = $(this);
+
+                    playButton.click(function(){
+                        clearAllIntervals();
+                        paused = true;
+                        playButton.parent('div').addClass('player-activated');
+                        var video_id = playButton.parent('div').data('video_id');
+                        playButton.replaceWith('<iframe id="ytplayer" type="text/html" width="100%" height="100%" src="http://www.youtube.com/embed/' + video_id + '?autoplay=1&rel=0&controls=2&rel=0 frameborder="0"/>');
+                    });
+                });
+            }
+        })();
+        
+        playBtnAction();
+        
+        
+        /*
+        * END
+        * behaviour of play button
+        * on the player area
+        * of each slide
+        */
 
     });
     /*
