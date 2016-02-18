@@ -35,24 +35,42 @@ $(document).ready(function(){
 
     var time = 5, 
         percentTime,
-        tick;
-
+        tick,
+        paused;
+    
+    //in the function below,
+    //assign a false bool to the 'paused' var
     function doProgressBar(){
+        paused = false;
         percentTime = 0;
+        
+        //set the 'tick' variable
+        //to a recurring 'incrementBarLength' function
         tick = setInterval(incrementBarLength, 10);
     }
 
     function incrementBarLength(){
-        percentTime += 1/time;
-        $('#progressBar').css({
-            width: percentTime + '%' 
-        });
-        if (percentTime >= 100){
-            clearAllIntervals();
-            $('#hotel-1').slick('slickNext');
+        
+        //make sure that this function
+        //checks whether 'paused' is false
+        if (paused === false){
+            percentTime += 1/time;
+            $('#progressBar').css({
+                width: percentTime + '%' 
+            });
+            
+            //make sure that this function
+            //checks whether 'paused' is false
+            if (percentTime >= 100 && paused === false){
+                clearAllIntervals();
+                $('#hotel-1').slick('slickNext');
+            }    
         }
     }
-
+    
+    //explicitly declare a 'slideMoved' function
+    //to make other code below
+    //more comprehensible
     function slideMoved(){
         clearAllIntervals();
     }
@@ -61,10 +79,23 @@ $(document).ready(function(){
     //brute force code
     //from "http://www.sitepoint.com/clear-setinterval-knowing-id/"
     function clearAllIntervals(){
-        for(i=0; i<100; i++){
+        for(i=0; i<9999; i++){
             window.clearInterval(i);
         }
     }
+    
+    
+    //mouseover event pauses the
+    //progress bar
+    $('#hotel-1').on('mouseover', function(){
+        paused = true;
+    });
+    
+    //and mouseout event resumes the
+    //progress bar
+    $('#hotel-1').on('mouseout', function(){
+        paused = false;
+    });
 
     /*
     * END
@@ -132,7 +163,10 @@ $(document).ready(function(){
                             hotel_1_li_item += '<div class="hotel-1-slide" data-video_id="' + rowData.image.video_id + '">';
                             //use the "medium" jpg for screen sizes above 640px
                                 hotel_1_li_item += '<img src="images/' + rowData.image.src + '-medium.jpg" width="100%" height="100%" />';
-                                hotel_1_li_item += '<div class="hotel-1-slide-overlay-player">';
+                                hotel_1_li_item += '<div class="hotel-1-slide-overlay-player" data-video_id="' + rowData.image.video_id + '">';
+                                    hotel_1_li_item += '<button class="play-button">';
+                                        hotel_1_li_item += 'Play Video';
+                                    hotel_1_li_item += '</button>';
                                 hotel_1_li_item += '</div>';
                             hotel_1_li_item += '</div>';
                         hotel_1_li_item += '</li>';
@@ -175,7 +209,10 @@ $(document).ready(function(){
                             hotel_1_li_item += '<div class="hotel-1-slide" data-video_id="' + rowData.image.video_id + '">';
                             //use the "mobile" jpg for screen sizes <= 640px
                                 hotel_1_li_item += '<img src="images/' + rowData.image.src + '-mobile.jpg" width="100%" height="100%" />';
-                                hotel_1_li_item += '<div class="hotel-1-slide-overlay-player">';
+                                hotel_1_li_item += '<div class="hotel-1-slide-overlay-player" data-video_id="' + rowData.image.video_id + '">';
+                                    hotel_1_li_item += '<button class="play-button">';
+                                        hotel_1_li_item += 'Play Video';
+                                    hotel_1_li_item += '</button>';
                                 hotel_1_li_item += '</div>';
                             hotel_1_li_item += '</div>';
                         hotel_1_li_item += '</li>';
@@ -236,7 +273,10 @@ $(document).ready(function(){
                                     hotel_1_li_item += '<div class="hotel-1-slide" data-video_id="' + rowData.image.video_id + '">';
                                     //use the "medium" jpg for screen sizes above 640px
                                         hotel_1_li_item += '<img src="images/' + rowData.image.src + '-medium.jpg" width="100%" height="100%" />';
-                                        hotel_1_li_item += '<div class="hotel-1-slide-overlay-player">';
+                                        hotel_1_li_item += '<div class="hotel-1-slide-overlay-player" data-video_id="' + rowData.image.video_id + '">';
+                                            hotel_1_li_item += '<button class="play-button">';
+                                                hotel_1_li_item += 'Play Video';
+                                            hotel_1_li_item += '</button>';
                                         hotel_1_li_item += '</div>';
                                     hotel_1_li_item += '</div>';
                                 hotel_1_li_item += '</li>';
@@ -285,7 +325,10 @@ $(document).ready(function(){
                                     hotel_1_li_item += '<div class="hotel-1-slide" data-video_id="' + rowData.image.video_id + '">';
                                     //use the "mobile" jpg for screen sizes <= 640px
                                         hotel_1_li_item += '<img src="images/' + rowData.image.src + '-mobile.jpg" width="100%" height="100%" />';
-                                        hotel_1_li_item += '<div class="hotel-1-slide-overlay-player">';
+                                        hotel_1_li_item += '<div class="hotel-1-slide-overlay-player" data-video_id="' + rowData.image.video_id + '">';
+                                            hotel_1_li_item += '<button class="play-button">';
+                                                hotel_1_li_item += 'Play Video';
+                                            hotel_1_li_item += '</button>';
                                         hotel_1_li_item += '</div>';
                                     hotel_1_li_item += '</div>';
                                 hotel_1_li_item += '</li>';
