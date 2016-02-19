@@ -46,27 +46,42 @@ $(document).ready(function(){
 
     var time = 7,
     lengIncrement,
-    tick;
+    tick,
+    paused;
 
-    //the code below
-    //forms the basis for
-    //creating the movement of
-    //the slide bar
-    function doIncrement(){
+    function doProgressBar(){
         clearAllIntervals();
-        lengIncrement = 0
-        tick = setInterval(barIncrement, 1000);
+        lengIncrement = 0;
+        paused = false;
+        tick = setInterval(barIncrement, 10);
 
     }
 
     function barIncrement(){
-        lengIncrement += 1; 
-        console.log('The length Increment is: ' + lengIncrement);
-    }
+        if (paused === false){
+             lengIncrement += 1/time;
+            $('#progressBar').css({
+               'width': lengIncrement + '%' 
+            });
 
-   /* $('#hotel-1').on('slideMoved', function(){
-       console.log('Slide has moved'); 
-    });*/
+            if (lengIncrement >= 100){
+                clearAllIntervals();
+                bxslider_hotel_1.goToNextSlide();
+            }
+        }
+    }
+    
+    $('#hotel-1, #hotel-2').on('mouseover', function(){
+       paused = true; 
+    });
+    
+     
+    $('#hotel-1, #hotel-2').on('mouseout', function(){
+       paused = false; 
+    });
+    
+   
+
 
     /*
     * END
@@ -174,10 +189,16 @@ $(document).ready(function(){
                 mode: 'fade',
                 pager: false,
                 onSliderLoad: function(){
-                        //doIncrement();
+                        doProgressBar();
+                        $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseover', function(){
+                            paused = true;
+                        });
+                        $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseout', function(){
+                            paused = false;
+                        });
                     },
                 onSlideAfter: function(){
-                        //doIncrement();
+                        doProgressBar();
                     }                
             });
             
@@ -206,10 +227,22 @@ $(document).ready(function(){
                 }
             });
             
-            //reload hotel-1 bxslider
+            //reload the bxslider
             bxslider_hotel_1.reloadSlider({
                 mode: 'fade',
-                pager: false
+                pager: false,
+                onSliderLoad: function(){
+                        doProgressBar();
+                        $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseover', function(){
+                            paused = true;
+                        });
+                        $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseout', function(){
+                            paused = false;
+                        });
+                    },
+                onSlideAfter: function(){
+                        doProgressBar();
+                    }                
             });
         }
         
@@ -255,10 +288,22 @@ $(document).ready(function(){
                         }
                     });
             
-                    //reload hotel-1 bxslider
+                    //reload the bxslider
                     bxslider_hotel_1.reloadSlider({
                         mode: 'fade',
-                        pager: false
+                        pager: false,
+                        onSliderLoad: function(){
+                                doProgressBar();
+                                $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseover', function(){
+                                    paused = true;
+                                });
+                                $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseout', function(){
+                                    paused = false;
+                                });
+                            },
+                        onSlideAfter: function(){
+                                doProgressBar();
+                            }                
                     });
                    
                 } else if ($(window).width() <= 640) {
@@ -288,11 +333,23 @@ $(document).ready(function(){
                             $('#hotel-1').append(hotel_1_li_item);
                         }
                     });
-            
-                    //reload hotel-1 bxslider
+                    
+                    //reload the bxslider
                     bxslider_hotel_1.reloadSlider({
                         mode: 'fade',
-                        pager: false
+                        pager: false,
+                        onSliderLoad: function(){
+                                doProgressBar();
+                                $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseover', function(){
+                                    paused = true;
+                                });
+                                $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseout', function(){
+                                    paused = false;
+                                });
+                            },
+                        onSlideAfter: function(){
+                                doProgressBar();
+                            }                
                     }); 
                     
                 }
