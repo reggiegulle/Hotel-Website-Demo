@@ -27,6 +27,15 @@ $(document).ready(function(){
         fade: true
     });
     
+    //initialize hotel-2 slick slider
+    $('#hotel-2').slick({
+        slide: 'li',
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        infinite: false,
+        lazyLoad: 'progressive'
+    });
+    
     /*
     * START
     * variables and behaviours
@@ -103,9 +112,35 @@ $(document).ready(function(){
     * of the progress bar
     */
     
+    /*
+    * START
+    * Item to be added to
+    * the hotel-1 slider
+    * if the hoteltable
+    * does not contain data
+    * (i.e., Null search results)
+    */
+    var hotel_1_error_li = '<li class="hotel-1-empty">Sorry, no results found.  Please try again.</li>';
+    
+    function nullProgressBar(){
+        clearAllIntervals();
+        $('#progressBar').css({
+            width: 0 + '%' 
+        });
+    }
+   
+    /*
+    * END
+    * Item to be added to
+    * the hotel-1 slider
+    * if the hoteltable
+    * does not contain data
+    * (i.e., Null search results)
+    */
+    
     
     /*
-     *BEGIN action on every table re-draw
+    * BEGIN action on every table re-draw
     */
     hoteltable.on('draw.dt', function(){
         
@@ -132,8 +167,6 @@ $(document).ready(function(){
         //the data of each
         //individual row of the hoteltable
         var rowData;
-        
-       
         
         /*
         * on initial load of table,
@@ -174,6 +207,47 @@ $(document).ready(function(){
                     }
                 });
                 
+                    /*
+                    * START
+                    * Assemble hotel-2 slider
+                    */
+
+                    //remove hotel-2 slick carousel items
+                    //to refresh the list
+                    while($('#hotel-2 li').length > 0){
+                        $('#hotel-2').slick('slickRemove', false);
+                    }
+
+                    /*
+                    populate hotel-2
+                    */
+                    $('#hoteltable tbody tr').each(function(){
+                        var thisRow = $(this);
+                        //get the data (json data source) from each row
+                        rowData = hoteltable.row(thisRow).data();
+                        //add the relevant data to the owl-carousel bottom list
+                        //one list item at a time
+                        if (typeof(rowData) != 'undefined'){
+                            var hotel_2_li_item = '<li>';
+                            hotel_2_li_item += '<div class="hotel-2-slide">';
+                            hotel_2_li_item +='<img src="images/' + rowData.image.src + '-small.jpg" width="100%" height="100%" alt="' + rowData.image.src + '"></div>';
+                            hotel_2_li_item += '<h6>';
+                            hotel_2_li_item += rowData.name;
+                            hotel_2_li_item += '</h6>';
+                            hotel_2_li_item += '<p>(';
+                            hotel_2_li_item += rowData.category.category_filter;
+                            hotel_2_li_item += ')</p>';
+                            hotel_2_li_item += '</li>';
+                            $('#hotel-2').slick('slickAdd', hotel_2_li_item, false);
+                        }
+                    });
+
+
+                    /*
+                    * END
+                    * Assemble hotel-2 slider
+                    */
+                
                 currentHotelSlide = $('#hotel-1').slick('slickCurrentSlide');
                 
                 doProgressBar();
@@ -191,6 +265,8 @@ $(document).ready(function(){
                 
             } else {
                 //put error slide
+                $('#hotel-1').slick('slickAdd', hotel_1_error_li, false);
+                nullProgressBar();
             }
         } else if ($(window).width() <= 640) {
             
@@ -243,6 +319,8 @@ $(document).ready(function(){
     
             } else {
                 //put error slide
+                $('#hotel-1').slick('slickAdd', hotel_1_error_li, false);
+                nullProgressBar();
             }
         }
         
@@ -332,6 +410,8 @@ $(document).ready(function(){
                         }
                     } else {
                         //put error slide
+                        $('#hotel-1').slick('slickAdd', hotel_1_error_li, false);
+                        nullProgressBar();
                     } 
                 } else if ($(window).width() <= 640) {
                     //on browser resize,
@@ -409,6 +489,8 @@ $(document).ready(function(){
                         
                     } else {
                         //put error slide
+                        $('#hotel-1').slick('slickAdd', hotel_1_error_li, false);
+                        nullProgressBar();
                     } 
                 }
             }, 500, 'slickResize');

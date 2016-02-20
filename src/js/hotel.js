@@ -4,23 +4,6 @@ Javascript for Hotels Web Template
 
 $(document).ready(function(){
     
-    
-    /* utility function for
-    window resize Event
-    Code from this StackOverflow answer: http://stackoverflow.com/a/4541963/34155*/
-    var waitForFinalEvent = (function () {
-        var timers = {};
-        return function (callback, ms, uniqueId) {
-            if (!uniqueId) {
-                uniqueId = "failedID";
-            }
-            if (timers.uniqueId) {
-                clearTimeout(timers.uniqueId);
-            }
-            timers.uniqueId = setTimeout(callback, ms);
-        };
-    })();
-    
 	//initialize "hoteltable" dataTable instance
 	var hoteltable = $('#hoteltable').dataTable({
 		'ajax':'hotel.json',
@@ -107,12 +90,9 @@ $(document).ready(function(){
     $("#sort-name option:eq(0)").prop('selected', true);
     $("#sort-price option:eq(0)").prop('selected', true);
     $("#category-filter option:eq(0)").prop('selected', true);
-    
-
+	
     var hoteltable = $('#hoteltable').DataTable();
-    
-   
-    
+
 	$("#sort-name").change(function(){
         $("#sort-price option:eq(0)").prop('selected', true);
         var sort_name_value = $(this).val();

@@ -138,15 +138,9 @@
 .hotel-1-slide .hotel-1-slide-overlay-player {
   position: absolute;
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 4;
-}
-.slick-prev {
-  left: 15px;
-  z-index: 9999;
-}
-.slick-next {
-  right: 15px;
-  z-index: 9999;
 }
 @media screen and (max-width: 480px) {
   div.table-thumb {

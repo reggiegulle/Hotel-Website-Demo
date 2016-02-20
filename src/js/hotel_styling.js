@@ -23,52 +23,97 @@ $(document).ready(function(){
     when the "hotel" table is rendered
     */
     hoteltable.on('draw.dt', function(){
-        //establish the height of 
-        //the slide div's overlay
+        //establish the height of the slide div
+        //and the slide div's overlay
         //on table render
         if ($(window).width() > 640){
-            
-            //if the hoteltable has no errors
-            if ($('#hoteltable tbody tr td.dataTables_empty').length < 1){
-                
-                //if window width is greater than 640 pixels
-                //make the overlay occupy only about half
-                //of the area of the slide div
-                //with slight margins
+            /*
+            if window width is greater than 640 pixels
+            then the width:height ratio is around 3:1
+            */
+            $('.hotel-1-slide').css(
+                {
+                    'height': ($('.hotel-1-slide').width()/3.047619047619048) + 'px'
+                }
 
-                $('.hotel-1-slide-overlay-player').css(
-                    {
-                        'width': (($('.hotel-1-slide').width()/2) - 10) + 'px',
-                        'height': (($('.hotel-1-slide').width()/3.047619047619048) - 10) + 'px',
-                        'top': '5px',
-                        'right': '5px',
-                        'background-color': 'rgba(255, 255, 255, 0.5)'
-                    }
-                );
+            );
             
+            /*
+            if window width is greater than 640 pixels
+            make the overlay occupy only about half
+            of the area of the slide div
+            with slight margins
+            
+            $('.hotel-1-slide-overlay-player').css(
+                {
+                    'width': (($('.hotel-1-slide').width()/2) - 10) + 'px',
+                    'height': (($('.hotel-1-slide').width()/3.047619047619048) - 10) + 'px',
+                    'top': '5px',
+                    'right': '5px',
+                    'background-color': 'rgba(255, 255, 255, 0.5)'
+                }
+            );
+            if ($('#owl-hotel-1 li:eq(0) div').hasClass('no-search-results')){
+                $('.hotel-1-slide').css(
+                    {
+                        'background': 'rgba(255, 255, 255, 0.8)',
+                        'height':'auto'                        
+                    }
+                )
             } else {
-                //css of the error slide
-            }
+                $('.hotel-1-slide').each(function(){
+                    var thisImgSrc = $(this).data('imgsrc');
+                    $(this).css(
+                        {
+                            'background-image': 'url("images/' + thisImgSrc + '-medium.jpg")',
+                            'background-size': 'cover' 
+                        }
+                    );
+                });
+            }*/
             
         } else if ($(window).width() <= 640) {
-            
-            //if the hoteltable has no errors
-            if ($('#hoteltable tbody tr td.dataTables_empty').length < 1){
-                //if window width is less than or equal to 640 pixels
-                //make the overlay occupy
-                //the whole slide div area
-                $('.hotel-1-slide-overlay-player').css(
+            /*
+            if window width is less than or equal to 640 pixels
+            then the width:height ratio is around 1.75:1
+            */
+            $('.hotel-1-slide').css(
+                {
+                    'height': ($('.hotel-1-slide').width()/1.777777777778) + 'px'
+                }
+
+            );
+            /*
+            if window width is less than or equal to 640 pixels
+            make the overlay occupy
+            the whole slide div area
+            $('.hotel-1-slide-overlay-player').css(
+                {
+                    'width': $('.hotel-1-slide').width() + 'px',
+                    'height': ($('.hotel-1-slide').width()/1.777777777778) + 'px',
+                    'top': '0px',
+                    'right': '0px',
+                    'background-color': 'rgba(255, 255, 255, 0.25)'
+                }
+            );
+            if ($('#owl-hotel-1 li:eq(0) div').hasClass('no-search-results')){
+                $('.hotel-1-slide').css(
                     {
-                        'width': $('.hotel-1-slide').width() + 'px',
-                        'height': ($('.hotel-1-slide').width()/1.777777777778) + 'px',
-                        'top': '0px',
-                        'right': '0px',
-                        'background-color': 'rgba(255, 255, 255, 0.25)'
+                        'background': 'rgba(255, 255, 255, 0.8)',
+                        'height':'auto'                        
                     }
-                );
+                )
             } else {
-                //css of the error slide
-            }
+                $('.hotel-1-slide').each(function(){
+                    var thisImgSrc = $(this).data('imgsrc');
+                    $(this).css(
+                        {
+                            'background-image': 'url("images/' + thisImgSrc + '-mobile.jpg")',
+                            'background-size': 'cover' 
+                        }
+                    );
+                });
+            }*/
         }
        
         
@@ -76,59 +121,99 @@ $(document).ready(function(){
         //and the slide div's overlay
         //on browser resize
         $(window).resize(function(){
-            
             waitForFinalEvent(function(){
-                //establish the height of 
-                //the slide div's overlay
-                //on window resize
                 if ($(window).width() > 640){
+                    /*
+                    on browser resize,
+                    if window width is greater than 640 pixels
+                    then the width:height ratio is around 3:1
+                    */
+                    $('.hotel-1-slide').css(
+                        {
+                            'height': ($('.hotel-1-slide').width()/3.047619047619048) + 'px'
+                        }
+                    );
                     
-                    //if the hoteltable has no errors
-                    if ($('#hoteltable tbody tr td.dataTables_empty').length < 1){
-                        
-                        //on browser resize,
-                        //if window width is greater than 640 pixels
-                        //make the overlay occupy only about half
-                        //of the area of the slide div
-                        //with slight margins
-
-                        $('.hotel-1-slide-overlay-player').css(
+                    
+                    /*on browser resize,
+                    if window width is greater than 640 pixels
+                    make the overlay occupy only about half
+                    of the area of the slide div
+                    with slight margins
+                    
+                    $('.hotel-1-slide-overlay-player').css(
+                        {
+                            'width': (($('.hotel-1-slide').width()/2) - 10) + 'px',
+                            'height': (($('.hotel-1-slide').width()/3.047619047619048) - 10) + 'px',
+                            'top': '5px',
+                            'right': '5px',
+                            'background-color': 'rgba(255, 255, 255, 0.5)'
+                        }
+                    );
+                    if ($('#owl-hotel-1 li:eq(0) div').hasClass('no-search-results')){
+                        $('.hotel-1-slide').css(
                             {
-                                'width': (($('.hotel-1-slide').width()/2) - 10) + 'px',
-                                'height': (($('.hotel-1-slide').width()/3.047619047619048) - 10) + 'px',
-                                'top': '5px',
-                                'right': '5px',
-                                'background-color': 'rgba(255, 255, 255, 0.5)'
+                                'background': 'rgba(255, 255, 255, 0.8)',
+                                'height':'auto'                        
                             }
-                        );
-                        
+                        )
                     } else {
-                      //css of the error slide  
-                    }
-                    
-                    
+                         $('.hotel-1-slide').each(function(){
+                            var thisImgSrc = $(this).data('imgsrc');
+                            $(this).css(
+                                {
+                                    'background-image': 'url("images/' + thisImgSrc + '-medium.jpg")',
+                                    'background-size': 'cover' 
+                                }
+                            );
+                        });
+                    }*/
                 } else if ($(window).width() <= 640) {
+                    /*
+                    on browser resize,
+                    if window width is less than or equal to 640 pixels
+                    then the width:height ratio is around 1.75:1
+                    */
+                    $('.hotel-1-slide').css(
+                        {
+                            'height': ($('.hotel-1-slide').width()/1.777777777778) + 'px'
+                        }
+
+                    );
                     
-                    //if the hoteltable has no errors
-                    if ($('#hoteltable tbody tr td.dataTables_empty').length < 1){
-                        
-                        //on browser resize,
-                        //if window width is less than or equal to 640 pixels
-                        //make the overlay occupy
-                        //the whole slide div area 
-                        $('.hotel-1-slide-overlay-player').css(
+                    /*
+                    on browser resize,
+                    if window width is less than or equal to 640 pixels
+                    make the overlay occupy
+                    the whole slide div area 
+                    $('.hotel-1-slide-overlay-player').css(
+                        {
+                            'width': $('.hotel-1-slide').width() + 'px',
+                            'height': ($('.hotel-1-slide').width()/1.777777777778) + 'px',
+                            'top': '0px',
+                            'right': '0px',
+                            'background-color': 'rgba(255, 255, 255, 0.25)'
+                        }
+                    );
+                    if ($('#owl-hotel-1 li:eq(0) div').hasClass('no-search-results')){
+                        $('.hotel-1-slide').css(
                             {
-                                'width': $('.hotel-1-slide').width() + 'px',
-                                'height': ($('.hotel-1-slide').width()/1.777777777778) + 'px',
-                                'top': '0px',
-                                'right': '0px',
-                                'background-color': 'rgba(255, 255, 255, 0.25)'
+                                'background': 'rgba(255, 255, 255, 0.8)',
+                                'height':'auto'                        
                             }
-                        );
-                        
+                        )
                     } else {
-                        //css of the error slide
+                        $('.hotel-1-slide').each(function(){
+                            var thisImgSrc = $(this).data('imgsrc');
+                            $(this).css(
+                                {
+                                    'background-image': 'url("images/' + thisImgSrc + '-mobile.jpg")',
+                                    'background-size': 'cover' 
+                                }
+                            );
+                        });
                     }
+                */    
                 }
                 
             }, 500, 'owl-hotel-1-slide-resize');
