@@ -44,7 +44,7 @@ $(document).ready(function(){
         }
     }
 
-    var time = 7,
+    var time = 5,
     lengIncrement,
     tick,
     paused;
@@ -59,7 +59,7 @@ $(document).ready(function(){
 
     function barIncrement(){
         if (paused === false){
-             lengIncrement += 1/time;
+            lengIncrement += 1/time;
             $('#progressBar').css({
                'width': lengIncrement + '%' 
             });
@@ -99,9 +99,15 @@ $(document).ready(function(){
     * after each rendering
     * of the "hoteltable" table element
     */
+    
+    
+    
     hoteltable.on('draw.dt',function(){
         
         clearAllIntervals();
+        
+        
+        
                    
         //remove items from upper bxslider ("ul hotel-1")
         //and lower bxslider ("ul hotel-2")
@@ -114,10 +120,11 @@ $(document).ready(function(){
             $('#hotel-2').empty();
         }
 
+        var currentHotel1Index;
         
         var rowData;
         
-       
+        
         
         /*
         populate hotel-2 bxslider
@@ -160,10 +167,7 @@ $(document).ready(function(){
         /*
         populate hotel-1 bxslider
         */
-        if ($(window).width() > 640) {
-            
-           
-                      
+        if ($(window).width() > 640) {         
             $('#hoteltable tbody tr').each(function(){
                 var thisRow = $(this);
                 //get the data (json data source) from each row
@@ -189,6 +193,9 @@ $(document).ready(function(){
                 mode: 'fade',
                 pager: false,
                 onSliderLoad: function(){
+                        
+                        
+                    
                         doProgressBar();
                         $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseover', function(){
                             paused = true;
@@ -196,9 +203,21 @@ $(document).ready(function(){
                         $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseout', function(){
                             paused = false;
                         });
+                        $('#hotel-1 li:eq(0)').click(function(){
+                            lengIncrement = 0;
+                            bxslider_hotel_2.goToSlide(0);
+                        }); 
                     },
-                onSlideAfter: function(){
+                onSlideAfter: function($slideElement, oldIndex, newIndex){
+                    
+                        currentHotel1Index = newIndex;
+                    
+                        bxslider_hotel_2.goToSlide(newIndex);
+                        lengIncrement = 0;
                         doProgressBar();
+                        $slideElement.click(function(){
+                            lengIncrement = 0;
+                        }); 
                     }                
             });
             
@@ -239,17 +258,24 @@ $(document).ready(function(){
                         $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseout', function(){
                             paused = false;
                         });
+                        $('#hotel-1 li:eq(0)').click(function(){
+                            bxslider_hotel_2.goToSlide(0);
+                            lengIncrement = 0;
+                        });
                     },
-                onSlideAfter: function(){
+                onSlideAfter: function($slideElement, oldIndex, newIndex){
+                    
+                        currentHotel1Index = newIndex;
+                    
+                        bxslider_hotel_2.goToSlide(newIndex);
+                        lengIncrement = 0;
                         doProgressBar();
+                        $slideElement.click(function(){
+                            lengIncrement = 0;
+                        }); 
                     }                
             });
         }
-        
-       
-        
-        
-        
         
         /*
         modify contents of hotel-1 bxslider
@@ -293,6 +319,7 @@ $(document).ready(function(){
                         mode: 'fade',
                         pager: false,
                         onSliderLoad: function(){
+                                
                                 doProgressBar();
                                 $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseover', function(){
                                     paused = true;
@@ -300,12 +327,30 @@ $(document).ready(function(){
                                 $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseout', function(){
                                     paused = false;
                                 });
+                            
+                                if (currentHotel1Index < 1) {
+                                    bxslider_hotel_2.goToSlide(0);
+                                } else if (currentHotel1Index >= 1){
+                                    bxslider_hotel_1.goToSlide(currentHotel1Index);
+                                    bxslider_hotel_2.goToSlide(currentHotel1Index);
+                                }
+                            
+                                
                             },
-                        onSlideAfter: function(){
-                                doProgressBar();
-                            }                
+                        onSlideAfter: function($slideElement, oldIndex, newIndex){
+                            currentHotel1Index = newIndex;
+                            bxslider_hotel_2.goToSlide(newIndex);
+                            lengIncrement = 0;
+                            doProgressBar();
+                            $slideElement.click(function(){
+                                lengIncrement = 0;
+                            }); 
+                        }                        
                     });
+                    
                    
+                    
+                    
                 } else if ($(window).width() <= 640) {
                     
                     //remove items from upper bxslider ("ul hotel-1")
@@ -346,10 +391,22 @@ $(document).ready(function(){
                                 $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseout', function(){
                                     paused = false;
                                 });
+                                
+                                if (currentHotel1Index < 1) {
+                                    bxslider_hotel_2.goToSlide(0);
+                                } else if (currentHotel1Index >= 1){
+                                    bxslider_hotel_1.goToSlide(currentHotel1Index);
+                                    bxslider_hotel_2.goToSlide(currentHotel1Index);
+                                }
                             },
-                        onSlideAfter: function(){
+                        onSlideAfter: function($slideElement, oldIndex, newIndex){
+                                bxslider_hotel_2.goToSlide(newIndex);
+                                lengIncrement = 0;
                                 doProgressBar();
-                            }                
+                                $slideElement.click(function(){
+                                    lengIncrement = 0;
+                                }); 
+                            }                         
                     }); 
                     
                 }
