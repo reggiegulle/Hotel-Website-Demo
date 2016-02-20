@@ -129,14 +129,27 @@ $(document).ready(function(){
         /*
         populate hotel-2 bxslider
         */
+        
+        //instantiate a variable
+        //that increments by one
+        //per iteration
+        var index_position = 0;
+        
         $('#hoteltable tbody tr').each(function(){
+            
             var thisRow = $(this);
             //get the data (json data source) from each row
             rowData = hoteltable.row(thisRow).data();
+            
             //add the relevant data to the owl-carousel bottom list
             //one list item at a time
             if (typeof(rowData) != 'undefined'){
-                var hotel_2_li_item = '<li>';
+                
+                //per row iteration,
+                //increment index_position by 1
+                index_position++;
+                //add this data to each hotel-2 li
+                var hotel_2_li_item = '<li data-index_position="' + index_position + '">';
                 hotel_2_li_item += '<div class="hotel-2-slide">';
                 hotel_2_li_item +='<img src="images/' + rowData.image.src + '-small.jpg" width="100%" height="100%" alt="' + rowData.image.src + '" data-video_id="' + rowData.image.video_id + '"></div>';
                 hotel_2_li_item += '<h6>';
@@ -157,7 +170,16 @@ $(document).ready(function(){
             slideWidth: 170,
             slideMargin: 10,
             moveSlides: 1,
-            pager: false
+            pager: false,
+            onSliderLoad: function(){
+                $('#hotel-2 li').click(function(){
+                    var hotel1IndxPos = $(this).data('index_position');
+                    //make bxslider_hotel_1
+                    //go to the slide 
+                    //specified by the index_position data
+                    bxslider_hotel_1.goToSlide(hotel1IndxPos - 1);
+                });
+            }
         });
         
         
@@ -181,6 +203,9 @@ $(document).ready(function(){
                         //use the "medium" jpg for screen sizes above 640px
                             hotel_1_li_item += '<img src="images/' + rowData.image.src + '-medium.jpg" width="100%" height="100%" />';
                             hotel_1_li_item += '<div class="hotel-1-slide-overlay-player">';
+                                hotel_1_li_item += '<button class="play-button">';
+                                    hotel_1_li_item += 'Play Video';
+                                hotel_1_li_item += '</button>';
                             hotel_1_li_item += '</div>';
                         hotel_1_li_item += '</div>';
                     hotel_1_li_item += '</li>';
@@ -194,9 +219,15 @@ $(document).ready(function(){
                 pager: false,
                 onSliderLoad: function(){
                         
-                        
+                        //if window width is greater than 640 pixels
+                        //make the overlay occupy only about half
+                        //of the area of the slide div
+                        //with slight margins
+
+                        setOverlayCss('large');
                     
                         doProgressBar();
+                    
                         $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseover', function(){
                             paused = true;
                         });
@@ -239,6 +270,9 @@ $(document).ready(function(){
                         //use the "mobile" jpg for screen sizes equal to or less than 640px
                             hotel_1_li_item += '<img src="images/' + rowData.image.src + '-mobile.jpg" width="100%" height="100%" />';
                             hotel_1_li_item += '<div class="hotel-1-slide-overlay-player">';
+                                hotel_1_li_item += '<button class="play-button">';
+                                    hotel_1_li_item += 'Play Video';
+                                hotel_1_li_item += '</button>';
                             hotel_1_li_item += '</div>';
                         hotel_1_li_item += '</div>';
                     hotel_1_li_item += '</li>';
@@ -251,7 +285,11 @@ $(document).ready(function(){
                 mode: 'fade',
                 pager: false,
                 onSliderLoad: function(){
+                    
+                        setOverlayCss('small');
+                    
                         doProgressBar();
+                    
                         $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseover', function(){
                             paused = true;
                         });
@@ -307,6 +345,9 @@ $(document).ready(function(){
                                 //use the "medium" jpg for screen sizes above 640px
                                     hotel_1_li_item += '<img src="images/' + rowData.image.src + '-medium.jpg" width="100%" height="100%" />';
                                     hotel_1_li_item += '<div class="hotel-1-slide-overlay-player">';
+                                        hotel_1_li_item += '<button class="play-button">';
+                                            hotel_1_li_item += 'Play Video';
+                                        hotel_1_li_item += '</button>';
                                     hotel_1_li_item += '</div>';
                                 hotel_1_li_item += '</div>';
                             hotel_1_li_item += '</li>';
@@ -319,8 +360,11 @@ $(document).ready(function(){
                         mode: 'fade',
                         pager: false,
                         onSliderLoad: function(){
+                            
+                                setOverlayCss('large');
                                 
                                 doProgressBar();
+                            
                                 $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseover', function(){
                                     paused = true;
                                 });
@@ -372,6 +416,9 @@ $(document).ready(function(){
                                 //use the "mobile" jpg for screen sizes equal to or less than 640px
                                     hotel_1_li_item += '<img src="images/' + rowData.image.src + '-mobile.jpg" width="100%" height="100%" />';
                                     hotel_1_li_item += '<div class="hotel-1-slide-overlay-player">';
+                                        hotel_1_li_item += '<button class="play-button">';
+                                            hotel_1_li_item += 'Play Video';
+                                        hotel_1_li_item += '</button>';
                                     hotel_1_li_item += '</div>';
                                 hotel_1_li_item += '</div>';
                             hotel_1_li_item += '</li>';
@@ -384,7 +431,11 @@ $(document).ready(function(){
                         mode: 'fade',
                         pager: false,
                         onSliderLoad: function(){
+                             
+                                setOverlayCss('small');    
+                            
                                 doProgressBar();
+                            
                                 $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseover', function(){
                                     paused = true;
                                 });
@@ -420,6 +471,45 @@ $(document).ready(function(){
     * function that executes
     * after each rendering
     * of the "hoteltable" table element
+    */
+    
+    
+    /*
+    * START
+    * function that sets the styling
+    * of the slide overlay player
+    */
+    function setOverlayCss(width){
+        
+        switch (width) {
+            case 'large':   $('.hotel-1-slide-overlay-player').css(
+                                {
+                                    'width': (($('.hotel-1-slide').width()/2) - 10) + 'px',
+                                    'height': (($('.hotel-1-slide').width()/3.047619047619048) - 10) + 'px',
+                                    'top': '5px',
+                                    'right': '5px',
+                                    'background-color': 'rgba(255, 255, 255, 0.5)'
+                                }
+                            );
+            break;
+            case 'small':   $('.hotel-1-slide-overlay-player').css(
+                                {
+                                    'width': $('.hotel-1-slide').width() + 'px',
+                                    'height': ($('.hotel-1-slide').width()/1.777777777778) + 'px',
+                                    'top': '0px',
+                                    'right': '0px',
+                                    'background-color': 'rgba(255, 255, 255, 0.25)'
+                                }
+                            );
+            break;
+            default:
+            break;
+        } 
+    }
+    /*
+    * END
+    * function that sets the styling
+    * of the slide overlay player
     */
 
 });
