@@ -27,12 +27,6 @@ $(document).ready(function(){
         fade: true
     });
     
-    //initialize hotel-2 slick slider
-    $('#hotel-2').slick({
-        slide: 'li',
-        fade: true
-    });
-    
     /*
     * START
     * variables and behaviours
@@ -109,35 +103,9 @@ $(document).ready(function(){
     * of the progress bar
     */
     
-    /*
-    * START
-    * Item to be added to
-    * the hotel-1 slider
-    * if the hoteltable
-    * does not contain data
-    * (i.e., Null search results)
-    */
-    var hotel_1_error_li = '<li class="hotel-1-empty">Sorry, no results found.  Please try again.</li>';
-    
-    function nullProgressBar(){
-        clearAllIntervals();
-        $('#progressBar').css({
-            width: 0 + '%' 
-        });
-    }
-   
-    /*
-    * END
-    * Item to be added to
-    * the hotel-1 slider
-    * if the hoteltable
-    * does not contain data
-    * (i.e., Null search results)
-    */
-    
     
     /*
-    * BEGIN action on every table re-draw
+     *BEGIN action on every table re-draw
     */
     hoteltable.on('draw.dt', function(){
         
@@ -165,16 +133,7 @@ $(document).ready(function(){
         //individual row of the hoteltable
         var rowData;
         
-        /*
-        * START
-        * Assemble hotel-2 slider
-        */
-        
-        
-        /*
-        * END
-        * Assemble hotel-2 slider
-        */
+       
         
         /*
         * on initial load of table,
@@ -232,8 +191,6 @@ $(document).ready(function(){
                 
             } else {
                 //put error slide
-                $('#hotel-1').slick('slickAdd', hotel_1_error_li, false);
-                nullProgressBar();
             }
         } else if ($(window).width() <= 640) {
             
@@ -286,8 +243,6 @@ $(document).ready(function(){
     
             } else {
                 //put error slide
-                $('#hotel-1').slick('slickAdd', hotel_1_error_li, false);
-                nullProgressBar();
             }
         }
         
@@ -377,8 +332,6 @@ $(document).ready(function(){
                         }
                     } else {
                         //put error slide
-                        $('#hotel-1').slick('slickAdd', hotel_1_error_li, false);
-                        nullProgressBar();
                     } 
                 } else if ($(window).width() <= 640) {
                     //on browser resize,
@@ -456,8 +409,6 @@ $(document).ready(function(){
                         
                     } else {
                         //put error slide
-                        $('#hotel-1').slick('slickAdd', hotel_1_error_li, false);
-                        nullProgressBar();
                     } 
                 }
             }, 500, 'slickResize');
