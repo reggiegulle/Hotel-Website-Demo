@@ -79,9 +79,6 @@ $(document).ready(function(){
     $('#hotel-1, #hotel-2').on('mouseout', function(){
        paused = false; 
     });
-    
-   
-
 
     /*
     * END
@@ -171,16 +168,18 @@ $(document).ready(function(){
         populate hotel-2 bxslider
         */
 
-        //instantiate a variable
-        //that increments by one
-        //per iteration
-        var index_position = 0;
+        
         
         if ($('#hoteltable tbody tr td.dataTables_empty').length >= 1 ){
             
             appendErrorScreenHotel2();
             
         } else if ($('#hoteltable tbody tr td.dataTables_empty').length < 1 ){
+            
+            //instantiate a variable
+            //that increments by one
+            //per iteration
+            var hotel_1_index_position = 0;
             
             $('#hoteltable tbody tr').each(function(){
 
@@ -194,11 +193,11 @@ $(document).ready(function(){
 
                     //per row iteration,
                     //increment index_position by 1
-                    index_position++;
+                    hotel_1_index_position++;
                     //add this data to each hotel-2 li
-                    var hotel_2_li_item = '<li data-index_position="' + index_position + '">';
+                    var hotel_2_li_item = '<li data-index_position="' + hotel_1_index_position + '">';
                     hotel_2_li_item += '<div class="hotel-2-slide">';
-                    hotel_2_li_item +='<img src="images/' + rowData.image.src + '-small.jpg" width="100%" height="100%" alt="' + rowData.image.src + '" data-video_id="' + rowData.image.video_id + '"></div>';
+                    hotel_2_li_item +='<img src="images/' + rowData.image.src + '-small.jpg" width="100%" height="100%" alt="' + rowData.image.src + '"></div>';
                     hotel_2_li_item += '<h6>';
                     hotel_2_li_item += rowData.name;
                     hotel_2_li_item += '</h6>';
@@ -252,10 +251,10 @@ $(document).ready(function(){
                     //one list item at a time
                     if (typeof(rowData) != 'undefined'){
                         var hotel_1_li_item = '<li>';
-                            hotel_1_li_item += '<div class="hotel-1-slide" data-video_id="' + rowData.image.video_id + '">';
+                            hotel_1_li_item += '<div class="hotel-1-slide">';
                             //use the "medium" jpg for screen sizes above 640px
-                                hotel_1_li_item += '<img src="images/' + rowData.image.src + '-medium.jpg" width="100%" height="100%" />';
-                                hotel_1_li_item += '<div class="hotel-1-slide-overlay-player">';
+                                hotel_1_li_item += '<img src="images/' + rowData.image.src + '-medium.jpg" width="100%" height="100%" alt="' + rowData.image.src + '"/>';
+                                hotel_1_li_item += '<div class="hotel-1-slide-overlay-player" data-video_id="' + rowData.image.video_id + '">';
                                     hotel_1_li_item += '<button class="play-button">';
                                         hotel_1_li_item += 'Play Video';
                                     hotel_1_li_item += '</button>';
@@ -288,20 +287,22 @@ $(document).ready(function(){
                                 paused = false;
                             });
                             $('#hotel-1 li:eq(0)').click(function(){
-                                lengIncrement = 0;
                                 bxslider_hotel_2.goToSlide(0);
-                            }); 
+                                lengIncrement = 0;
+                            });
+                        
+                            playBtnAction();
+                        
                         },
                     onSlideAfter: function($slideElement, oldIndex, newIndex){
-
+                            returnPlayButton();    
+                            playBtnAction();
                             currentHotel1Index = newIndex;
-
                             bxslider_hotel_2.goToSlide(newIndex);
-                            lengIncrement = 0;
                             doProgressBar();
                             $slideElement.click(function(){
                                 lengIncrement = 0;
-                            }); 
+                            });
                         }                
                 });
 
@@ -325,10 +326,10 @@ $(document).ready(function(){
                     //one list item at a time
                     if (typeof(rowData) != 'undefined'){
                         var hotel_1_li_item = '<li>';
-                            hotel_1_li_item += '<div class="hotel-1-slide" data-video_id="' + rowData.image.video_id + '">';
+                            hotel_1_li_item += '<div class="hotel-1-slide">';
                             //use the "mobile" jpg for screen sizes equal to or less than 640px
-                                hotel_1_li_item += '<img src="images/' + rowData.image.src + '-mobile.jpg" width="100%" height="100%" />';
-                                hotel_1_li_item += '<div class="hotel-1-slide-overlay-player">';
+                                hotel_1_li_item += '<img src="images/' + rowData.image.src + '-mobile.jpg" width="100%" height="100%" alt="' + rowData.image.src + '"/>';
+                                hotel_1_li_item += '<div class="hotel-1-slide-overlay-player" data-video_id="' + rowData.image.video_id + '">';
                                     hotel_1_li_item += '<button class="play-button">';
                                         hotel_1_li_item += 'Play Video';
                                     hotel_1_li_item += '</button>';
@@ -359,17 +360,19 @@ $(document).ready(function(){
                                 bxslider_hotel_2.goToSlide(0);
                                 lengIncrement = 0;
                             });
+                            
+                            playBtnAction();
+                        
                         },
                     onSlideAfter: function($slideElement, oldIndex, newIndex){
-
+                            returnPlayButton();    
+                            playBtnAction();
                             currentHotel1Index = newIndex;
-
                             bxslider_hotel_2.goToSlide(newIndex);
-                            lengIncrement = 0;
                             doProgressBar();
                             $slideElement.click(function(){
                                 lengIncrement = 0;
-                            }); 
+                            });
                         }                
                 });
                 
@@ -409,10 +412,10 @@ $(document).ready(function(){
                             //one list item at a time
                             if (typeof(rowData) != 'undefined'){
                                 var hotel_1_li_item = '<li>';
-                                    hotel_1_li_item += '<div class="hotel-1-slide" data-video_id="' + rowData.image.video_id + '">';
+                                    hotel_1_li_item += '<div class="hotel-1-slide">';
                                     //use the "medium" jpg for screen sizes above 640px
-                                        hotel_1_li_item += '<img src="images/' + rowData.image.src + '-medium.jpg" width="100%" height="100%" />';
-                                        hotel_1_li_item += '<div class="hotel-1-slide-overlay-player">';
+                                        hotel_1_li_item += '<img src="images/' + rowData.image.src + '-medium.jpg" width="100%" height="100%" alt="' + rowData.image.src + '" />';
+                                        hotel_1_li_item += '<div class="hotel-1-slide-overlay-player" data-video_id="' + rowData.image.video_id + '">';
                                             hotel_1_li_item += '<button class="play-button">';
                                                 hotel_1_li_item += 'Play Video';
                                             hotel_1_li_item += '</button>';
@@ -442,14 +445,20 @@ $(document).ready(function(){
 
                                     if (currentHotel1Index < 1) {
                                         bxslider_hotel_2.goToSlide(0);
+                                        $('#hotel-1 li:eq(0)').click(function(){
+                                            bxslider_hotel_2.goToSlide(0);
+                                            lengIncrement = 0;
+                                        });
                                     } else if (currentHotel1Index >= 1){
                                         bxslider_hotel_1.goToSlide(currentHotel1Index);
                                         bxslider_hotel_2.goToSlide(currentHotel1Index);
                                     }
 
-
+                                    playBtnAction();
                                 },
                             onSlideAfter: function($slideElement, oldIndex, newIndex){
+                                returnPlayButton();    
+                                playBtnAction();
                                 currentHotel1Index = newIndex;
                                 bxslider_hotel_2.goToSlide(newIndex);
                                 lengIncrement = 0;
@@ -485,10 +494,10 @@ $(document).ready(function(){
                             //one list item at a time
                             if (typeof(rowData) != 'undefined'){
                                 var hotel_1_li_item = '<li>';
-                                    hotel_1_li_item += '<div class="hotel-1-slide" data-video_id="' + rowData.image.video_id + '">';
+                                    hotel_1_li_item += '<div class="hotel-1-slide">';
                                     //use the "mobile" jpg for screen sizes equal to or less than 640px
-                                        hotel_1_li_item += '<img src="images/' + rowData.image.src + '-mobile.jpg" width="100%" height="100%" />';
-                                        hotel_1_li_item += '<div class="hotel-1-slide-overlay-player">';
+                                        hotel_1_li_item += '<img src="images/' + rowData.image.src + '-mobile.jpg" width="100%" height="100%" alt="' + rowData.image.src + '" />';
+                                        hotel_1_li_item += '<div class="hotel-1-slide-overlay-player" data-video_id="' + rowData.image.video_id + '">';
                                             hotel_1_li_item += '<button class="play-button">';
                                                 hotel_1_li_item += 'Play Video';
                                             hotel_1_li_item += '</button>';
@@ -518,20 +527,27 @@ $(document).ready(function(){
 
                                     if (currentHotel1Index < 1) {
                                         bxslider_hotel_2.goToSlide(0);
+                                        $('#hotel-1 li:eq(0)').click(function(){
+                                            bxslider_hotel_2.goToSlide(0);
+                                            lengIncrement = 0;
+                                        });
                                     } else if (currentHotel1Index >= 1){
                                         bxslider_hotel_1.goToSlide(currentHotel1Index);
                                         bxslider_hotel_2.goToSlide(currentHotel1Index);
                                     }
+
+                                    playBtnAction();
                                 },
                             onSlideAfter: function($slideElement, oldIndex, newIndex){
-                                
+                                    returnPlayButton();    
+                                    playBtnAction();
+                                    currentHotel1Index = newIndex;
                                     bxslider_hotel_2.goToSlide(newIndex);
                                     lengIncrement = 0;
                                     doProgressBar();
                                     $slideElement.click(function(){
                                         lengIncrement = 0;
-                                    }); 
-                                
+                                    });
                                 }                         
                         }); 
                         
@@ -586,6 +602,60 @@ $(document).ready(function(){
     * END
     * function that sets the styling
     * of the slide overlay player
+    */
+    
+    
+    
+    /*
+    * START
+    * function that replaces
+    * the player button
+    * with an iframe
+    */
+    var playBtnAction = (function(){
+        
+        return function(){
+            $('#hotel-1 .play-button').each(function(){
+                var playButton = $(this);
+                playButton.click(function(){
+                    clearAllIntervals();
+                    paused = true;
+                    playButton.parent('div').addClass('player-activated');
+                    var video_id = playButton.parent('div').data('video_id');
+                    playButton.replaceWith('<iframe id="ytplayer" type="text/html" width="100%" height="100%" src="http://www.youtube.com/embed/' + video_id + '?autoplay=1&rel=0&controls=2&rel=0 frameborder="0"/>');
+                });
+            });
+        }
+    })();
+    
+    /*
+    * END
+    * function that replaces
+    * the player button
+    * with an iframe
+    */
+       
+    
+    
+    /*
+    * START
+    * function that replaces
+    * any iframes
+    * with a player button
+    */
+    function returnPlayButton(){
+        var playButton = '<button class="play-button">Play Video</button>';
+        var playerParent = $('#hotel-1 div.player-activated');
+        if ( playerParent.length > 0 ){
+            playerParent.contents().replaceWith(playButton);
+            playerParent.removeClass('player-activated');
+        }
+    }
+    /*
+    * END
+    * function that replaces
+    * any iframes
+    * with a player button
     */
 
 });

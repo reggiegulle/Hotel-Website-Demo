@@ -77,7 +77,8 @@ $(document).ready(function(){
                         'type': 'column',
                         'target': -1
                     }
-                }
+                },
+        'drawCallback': onHotelTableDraw
 	});
     
     //explicitly set the search input value
@@ -90,6 +91,39 @@ $(document).ready(function(){
     $("#sort-name option:eq(0)").prop('selected', true);
     $("#sort-price option:eq(0)").prop('selected', true);
     $("#category-filter option:eq(0)").prop('selected', true);
+    
+    function onHotelTableDraw() {
+        
+        //instantiate a variable
+        //that increments by one
+        //per iteration
+        var hotel_1_index_position = 0;
+        
+        $('#hoteltable tbody tr div.table-thumb').each(function(){
+            var table_thumb = $(this);
+            
+            //per row iteration,
+            //increment index_position by 1
+            hotel_1_index_position++;
+            
+            if( table_thumb.children('.play-button').length > 0 ){
+                table_thumb.children('.play-button').remove();
+            }
+            table_thumb.append('<div class="play-button" data-index_position="' + hotel_1_index_position + '">Play Button</div>'); 
+        });
+        
+        $('input.form-control.input-sm').keydown(function(event) {
+            var searchValue = $(this).val();
+            if ( event.which == 13 || event.keyCode == 13 ){
+                hoteltable.search(searchValue).draw();
+            } 
+        });
+        $('.search-reset.reset-button').click(function(){
+            $('input.form-control.input-sm').val('');
+            hoteltable.search('').draw();
+        });
+        
+    }
 	
     var hoteltable = $('#hoteltable').DataTable();
 
@@ -134,10 +168,6 @@ $(document).ready(function(){
             break;
         }     
 	});
-    
-    $('.hoteltable-custom-search input').on('keyup', function(){
-        hoteltable.search(this.value).draw();
-    });
     
     $(".sort-price-reset").click(function(){
         $("#sort-price option:eq(0)").prop('selected', true);
