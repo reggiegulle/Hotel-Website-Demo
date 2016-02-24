@@ -29,6 +29,8 @@ $(document).ready(function(){
     });
     
     /*
+    * function commented out
+    * for purposes of IE testing
     * START
     * function for building
     * the progress Bar 
@@ -38,6 +40,8 @@ $(document).ready(function(){
     //very hacky
     //brute force code
     //from "http://www.sitepoint.com/clear-setinterval-knowing-id/"
+    
+    /*
     function clearAllIntervals(){
         for(i=0; i<9999; i++){
             window.clearInterval(i);
@@ -79,8 +83,10 @@ $(document).ready(function(){
     $('#hotel-1, #hotel-2').on('mouseout', function(){
        paused = false; 
     });
-
+    */
     /*
+    * function commented out
+    * for purposes of IE testing
     * END
     * function for building
     * the progress Bar 
@@ -101,7 +107,11 @@ $(document).ready(function(){
     
     hoteltable.on('draw.dt',function(){
         
-        clearAllIntervals();
+        /*
+        * function below commented out
+        * for purposes of IE testing
+        */
+        //clearAllIntervals();
                    
         //remove items from upper bxslider ("ul hotel-1")
         //and lower bxslider ("ul hotel-2")
@@ -135,12 +145,16 @@ $(document).ready(function(){
                 mode: 'fade',
                 pager: false
             });
+            
+            /*
+            * function below commented out
+            * for purposes of IE testing
+            */
+            //clearAllIntervals();
 
-            clearAllIntervals();
-
-            $('#progressBar').css({
-               'width': 0 + '%' 
-            });
+            //$('#progressBar').css({
+            //   'width': 0 + '%' 
+            //});
             
         }
         
@@ -269,6 +283,23 @@ $(document).ready(function(){
                 bxslider_hotel_1.reloadSlider({
                     mode: 'fade',
                     pager: false,
+                    
+                    /*
+                    * START
+                    * options
+                    * for IE
+                    */
+                    
+                    auto: true,
+                    pause: 6000,
+                    autoHover: true,
+                    
+                    /*
+                    * END
+                    * options
+                    * for IE
+                    */
+                    
                     onSliderLoad: function(){
 
                             //if window width is greater than 640 pixels
@@ -277,9 +308,13 @@ $(document).ready(function(){
                             //with slight margins
 
                             setOverlayCss('large');
-
-                            doProgressBar();
-
+                            
+                            /*
+                            * functions below commented out
+                            * for purposes of IE testing
+                            */
+                            //doProgressBar();
+                            /* 
                             $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseover', function(){
                                 paused = true;
                             });
@@ -290,6 +325,7 @@ $(document).ready(function(){
                                 bxslider_hotel_2.goToSlide(0);
                                 lengIncrement = 0;
                             });
+                            */
                         
                             playBtnAction();
                         
@@ -299,10 +335,15 @@ $(document).ready(function(){
                             playBtnAction();
                             currentHotel1Index = newIndex;
                             bxslider_hotel_2.goToSlide(newIndex);
-                            doProgressBar();
-                            $slideElement.click(function(){
-                                lengIncrement = 0;
-                            });
+                        
+                            /*
+                            * function below commented out
+                            * for purposes of IE testing
+                            */
+                            //doProgressBar();
+                            //$slideElement.click(function(){
+                            //    lengIncrement = 0;
+                            //});
                         }                
                 });
 
@@ -344,12 +385,33 @@ $(document).ready(function(){
                 bxslider_hotel_1.reloadSlider({
                     mode: 'fade',
                     pager: false,
+                    
+                    /*
+                    * START
+                    * options
+                    * for IE
+                    */
+                    
+                    auto: true,
+                    pause: 6000,
+                    autoHover: true,
+                    
+                    /*
+                    * END
+                    * options
+                    * for IE
+                    */
+                    
                     onSliderLoad: function(){
 
                             setOverlayCss('small');
-
-                            doProgressBar();
-
+                            
+                            /*
+                            * functions below commented out
+                            * for purposes of IE testing
+                            */
+                            //doProgressBar();
+                            /*
                             $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseover', function(){
                                 paused = true;
                             });
@@ -360,7 +422,8 @@ $(document).ready(function(){
                                 bxslider_hotel_2.goToSlide(0);
                                 lengIncrement = 0;
                             });
-                            
+                            */
+                        
                             playBtnAction();
                         
                         },
@@ -369,10 +432,15 @@ $(document).ready(function(){
                             playBtnAction();
                             currentHotel1Index = newIndex;
                             bxslider_hotel_2.goToSlide(newIndex);
-                            doProgressBar();
-                            $slideElement.click(function(){
-                                lengIncrement = 0;
-                            });
+                        
+                            /*
+                            * function below commented out
+                            * for purposes of IE testing
+                            */
+                            //doProgressBar();
+                            //$slideElement.click(function(){
+                            //    lengIncrement = 0;
+                            //});
                         }                
                 });
                 
@@ -430,25 +498,56 @@ $(document).ready(function(){
                         bxslider_hotel_1.reloadSlider({
                             mode: 'fade',
                             pager: false,
+                            
+                            /*
+                            * START
+                            * options
+                            * for IE
+                            */
+
+                            auto: true,
+                            pause: 6000,
+                            autoHover: true,
+
+                            /*
+                            * END
+                            * options
+                            * for IE
+                            */
+                            
                             onSliderLoad: function(){
-
+                                
+                                    //if window width is greater than 640 pixels
+                                    //make the overlay occupy only about half
+                                    //of the area of the slide div
+                                    //with slight margins
                                     setOverlayCss('large');
-
-                                    doProgressBar();
-
+                                
+                                    /*
+                                    * functions below commented out
+                                    * for purposes of IE testing
+                                    */
+                                    //doProgressBar();
+                                    /*
                                     $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseover', function(){
                                         paused = true;
                                     });
                                     $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseout', function(){
                                         paused = false;
                                     });
+                                    */
 
                                     if (currentHotel1Index < 1) {
                                         bxslider_hotel_2.goToSlide(0);
-                                        $('#hotel-1 li:eq(0)').click(function(){
-                                            bxslider_hotel_2.goToSlide(0);
-                                            lengIncrement = 0;
-                                        });
+                                        
+                                        /*
+                                        * functions below commented out
+                                        * for purposes of IE testing
+                                        */
+                                        //$('#hotel-1 li:eq(0)').click(function(){
+                                        //    bxslider_hotel_2.goToSlide(0);
+                                        //    lengIncrement = 0;
+                                        //});
                                     } else if (currentHotel1Index >= 1){
                                         bxslider_hotel_1.goToSlide(currentHotel1Index);
                                         bxslider_hotel_2.goToSlide(currentHotel1Index);
@@ -461,11 +560,16 @@ $(document).ready(function(){
                                 playBtnAction();
                                 currentHotel1Index = newIndex;
                                 bxslider_hotel_2.goToSlide(newIndex);
-                                lengIncrement = 0;
-                                doProgressBar();
-                                $slideElement.click(function(){
-                                    lengIncrement = 0;
-                                }); 
+                                
+                                /*
+                                * function below commented out
+                                * for purposes of IE testing
+                                */
+                                //lengIncrement = 0;
+                                //doProgressBar();
+                                //$slideElement.click(function(){
+                                //    lengIncrement = 0;
+                                //}); 
                             }                        
                         });
 
@@ -512,25 +616,52 @@ $(document).ready(function(){
                         bxslider_hotel_1.reloadSlider({
                             mode: 'fade',
                             pager: false,
+                            
+                            /*
+                            * START
+                            * options
+                            * for IE
+                            */
+
+                            auto: true,
+                            pause: 6000,
+                            autoHover: true,
+
+                            /*
+                            * END
+                            * options
+                            * for IE
+                            */
+                            
                             onSliderLoad: function(){
 
-                                    setOverlayCss('small');    
-
-                                    doProgressBar();
-
+                                    setOverlayCss('small');
+                                
+                                    /*
+                                    * functions below commented out
+                                    * for purposes of IE testing
+                                    */
+                                    //doProgressBar();
+                                    
+                                    /*
                                     $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseover', function(){
                                         paused = true;
                                     });
                                     $('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseout', function(){
                                         paused = false;
                                     });
-
+                                    */
+                                    
                                     if (currentHotel1Index < 1) {
                                         bxslider_hotel_2.goToSlide(0);
-                                        $('#hotel-1 li:eq(0)').click(function(){
-                                            bxslider_hotel_2.goToSlide(0);
-                                            lengIncrement = 0;
-                                        });
+                                        /*
+                                        * functions below commented out
+                                        * for purposes of IE testing
+                                        */
+                                        //$('#hotel-1 li:eq(0)').click(function(){
+                                        //    bxslider_hotel_2.goToSlide(0);
+                                        //    lengIncrement = 0;
+                                        //});
                                     } else if (currentHotel1Index >= 1){
                                         bxslider_hotel_1.goToSlide(currentHotel1Index);
                                         bxslider_hotel_2.goToSlide(currentHotel1Index);
@@ -543,11 +674,16 @@ $(document).ready(function(){
                                     playBtnAction();
                                     currentHotel1Index = newIndex;
                                     bxslider_hotel_2.goToSlide(newIndex);
-                                    lengIncrement = 0;
-                                    doProgressBar();
-                                    $slideElement.click(function(){
-                                        lengIncrement = 0;
-                                    });
+                                
+                                    /*
+                                    * function below commented out
+                                    * for purposes of IE testing
+                                    */
+                                    //lengIncrement = 0;
+                                    //doProgressBar();
+                                    //$slideElement.click(function(){
+                                    //    lengIncrement = 0;
+                                    //});
                                 }                         
                         }); 
                         
@@ -618,8 +754,12 @@ $(document).ready(function(){
             $('#hotel-1 .play-button').each(function(){
                 var playButton = $(this);
                 playButton.click(function(){
-                    clearAllIntervals();
-                    paused = true;
+                    /*
+                    * functions/vars below commented out
+                    * for purposes of IE testing
+                    */
+                    //clearAllIntervals();
+                    //paused = true;
                     playButton.parent('div').addClass('player-activated');
                     var video_id = playButton.parent('div').data('video_id');
                     playButton.replaceWith('<iframe id="ytplayer" type="text/html" width="100%" height="100%" src="http://www.youtube.com/embed/' + video_id + '?autoplay=1&rel=0&controls=2&rel=0 frameborder="0"/>');
