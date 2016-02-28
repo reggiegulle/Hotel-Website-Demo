@@ -94,24 +94,6 @@ $(document).ready(function(){
     
     function onHotelTableDraw() {
         
-        //instantiate a variable
-        //that increments by one
-        //per iteration
-        var hotel_1_index_position = 0;
-        
-        $('#hoteltable tbody tr div.table-thumb').each(function(){
-            var table_thumb = $(this);
-            
-            //per row iteration,
-            //increment index_position by 1
-            hotel_1_index_position++;
-            
-            if( table_thumb.children('.play-button').length > 0 ){
-                table_thumb.children('.play-button').remove();
-            }
-            table_thumb.append('<div class="play-button" data-index_position="' + hotel_1_index_position + '">Play Button</div>'); 
-        });
-        
         $('input.form-control.input-sm').keydown(function(event) {
             var searchValue = $(this).val();
             if ( event.which == 13 || event.keyCode == 13 ){
@@ -189,7 +171,8 @@ $(document).ready(function(){
         hoteltable.columns().search('').draw();
     });
     
-   
+    //if IE
+    //this button and functionality are absent
     $('.all-reset').click(function(){
         $('input.form-control.input-sm').val('');
         hoteltable.search('').draw();
