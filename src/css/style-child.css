@@ -125,16 +125,6 @@
 .bx-wrapper .bx-loading {
   background: url('../images/bx_loader.gif') center center no-repeat #ffffff;
 }
-#progressLine {
-  background: #fff;
-  width: 100%;
-}
-#progressLine #progressBar {
-  width: 0%;
-  max-width: 100%;
-  height: 4px;
-  background: #7fc242;
-}
 .hotel-1-slide {
   position: relative;
 }
