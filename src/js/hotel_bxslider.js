@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function () {
     
     /* 
     * utility function for
@@ -119,7 +119,7 @@ $(document).ready(function(){
         }
     }
 
-    var time = 5,
+    var time = 7,
     lengIncrement,
     tick,
     paused;
@@ -195,10 +195,10 @@ $(document).ready(function(){
 				//increment index_position by 1
 				hotel_1_index_position++;
 				
-				if( table_thumb.children('.play-button').length > 0 ){
-					table_thumb.children('.play-button').remove();
+				if( table_thumb.children('.scrollUp-button').length > 0 ){
+					table_thumb.children('.scrollUp-button').remove();
 				}
-				table_thumb.append('<div class="play-button" data-index_position="' + hotel_1_index_position + '">Play Button</div>'); 
+				table_thumb.append('<div class="scrollUp-button" data-index_position="' + hotel_1_index_position + '">Scroll Up</div>'); 
 			});
 			/* END
 			* add play buttons to each table thumbnail
@@ -396,118 +396,72 @@ $(document).ready(function(){
 								* the player button
 								* with an iframe
 								*/
-								$('#hotel-1 .play-button').click(function(){
-									clearAllIntervals();
-									paused = true;
-									var video_id = $(this).parent('div').data('video_id');
-									$(this).replaceWith('<iframe id="ytplayer" type="text/html" width="100%" height="100%" src="http://www.youtube.com/embed/' + video_id + '?autoplay=1&rel=0&controls=2&rel=0 frameborder="0"/>');
-								});
+								bxsliderPlayBtnAxn();
 								/*
 								* END
 								* function that replaces
 								* the player button
 								* with an iframe
 								*/
-								
-								/*
-								* START
-								* function that controls
-								* the behaviour of
-								* the player buttons
-								* on the "hoteltable" table
-								*/
-								$('#hoteltable .play-button').click(function(){
-										clearAllIntervals();
-										paused = true;
-										//animate the document
-										//to scroll up
-										//to the hotel-1 slider
-										$('html, body').animate({
-											scrollTop: $('#hotel-1-container').offset().top 
-										},1000);
-										
-										var tablePlayBtn = $(this);
-										var hotel1IndexPos = (tablePlayBtn.data('index_position') - 1);
-										var video_id = tablePlayBtn.siblings('img').data('video_id');
-
-										//make the hotel-1 bxslider
-										//move to specified index position
-										bxslider_hotel_1.goToSlide(hotel1IndexPos);
-								});
-								/*
-								* END
-								* function that controls
-								* the behaviour of
-								* the player buttons
-								* on the "hoteltable" table
-								*/
-							
+                            
+                                /*
+                                * START
+                                * function that controls
+                                * the behaviour of
+                                * the player buttons
+                                * on the "hoteltable" table
+                                */
+                                tableScrollUpBtnAxn();
+                                /*
+                                * END
+                                * function that controls
+                                * the behaviour of
+                                * the player buttons
+                                * on the "hoteltable" table
+                                */
+                            
 							},
 						onSlideAfter: function ($slideElement, oldIndex, newIndex) {
 								returnPlayButton();    
 								currentHotel1Index = newIndex;
 								bxslider_hotel_2.goToSlide(newIndex);
-								
-								
-								/*
-								* START
-								* function that replaces
-								* the player button
-								* with an iframe
-								*/
-								$('#hotel-1 .play-button').click(function(){
-									clearAllIntervals();
-									paused = true;
-									var video_id = $(this).parent('div').data('video_id');
-									$(this).replaceWith('<iframe id="ytplayer" type="text/html" width="100%" height="100%" src="http://www.youtube.com/embed/' + video_id + '?autoplay=1&rel=0&controls=2&rel=0 frameborder="0"/>');
-								});
-								/*
-								* END
-								* function that replaces
-								* the player button
-								* with an iframe
-								*/
-								
-								/*
-								* START
-								* function that controls
-								* the behaviour of
-								* the player buttons
-								* on the "hoteltable" table
-								*/
-								$('#hoteltable .play-button').click(function(){
-										clearAllIntervals();
-										paused = true;
-										//animate the document
-										//to scroll up
-										//to the hotel-1 slider
-										$('html, body').animate({
-											scrollTop: $('#hotel-1-container').offset().top 
-										},1000);
-										
-										var tablePlayBtn = $(this);
-										var hotel1IndexPos = (tablePlayBtn.data('index_position') - 1);
-										var video_id = tablePlayBtn.siblings('img').data('video_id');
-
-										//make the hotel-1 bxslider
-										//move to specified index position
-										bxslider_hotel_1.goToSlide(newIndex);
-								});
-								/*
-								* END
-								* function that controls
-								* the behaviour of
-								* the player buttons
-								* on the "hoteltable" table
-								*/
-								
 								doProgressBar();
 								
 								$slideElement.click(function(){
 									lengIncrement = 0;
 								});
 								
-							}                
+								/*
+								* START
+								* function that replaces
+								* the player button
+								* with an iframe
+								*/
+								bxsliderPlayBtnAxn();
+								/*
+								* END
+								* function that replaces
+								* the player button
+								* with an iframe
+								*/
+                            
+                                /*
+                                * START
+                                * function that controls
+                                * the behaviour of
+                                * the player buttons
+                                * on the "hoteltable" table
+                                */
+                                tableScrollUpBtnAxn();
+                                /*
+                                * END
+                                * function that controls
+                                * the behaviour of
+                                * the player buttons
+                                * on the "hoteltable" table
+                                */
+                        
+                            }                
 					});
 
 				}
@@ -560,23 +514,83 @@ $(document).ready(function(){
 								$('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseout', function(){
 									paused = false;
 								});
+                            
 								$('#hotel-1 li:eq(0)').click(function(){
 									bxslider_hotel_2.goToSlide(0);
 									lengIncrement = 0;
 								});
 								
-								playBtnAction();
+								/*
+								* START
+								* function that replaces
+								* the player button
+								* with an iframe
+								*/
+								bxsliderPlayBtnAxn();
+								/*
+								* END
+								* function that replaces
+								* the player button
+								* with an iframe
+								*/
+                            
+                                /*
+                                * START
+                                * function that controls
+                                * the behaviour of
+                                * the player buttons
+                                * on the "hoteltable" table
+                                */
+                                tableScrollUpBtnAxn();
+                                /*
+                                * END
+                                * function that controls
+                                * the behaviour of
+                                * the player buttons
+                                * on the "hoteltable" table
+                                */
 							
 							},
 						onSlideAfter: function($slideElement, oldIndex, newIndex){
 								returnPlayButton();    
-								playBtnAction();
 								currentHotel1Index = newIndex;
 								bxslider_hotel_2.goToSlide(newIndex);
 								doProgressBar();
+                            
 								$slideElement.click(function(){
 									lengIncrement = 0;
 								});
+                            
+                                /*
+								* START
+								* function that replaces
+								* the player button
+								* with an iframe
+								*/
+								bxsliderPlayBtnAxn();
+								/*
+								* END
+								* function that replaces
+								* the player button
+								* with an iframe
+								*/
+                            
+                                /*
+                                * START
+                                * function that controls
+                                * the behaviour of
+                                * the player buttons
+                                * on the "hoteltable" table
+                                */
+                                tableScrollUpBtnAxn();
+                                /*
+                                * END
+                                * function that controls
+                                * the behaviour of
+                                * the player buttons
+                                * on the "hoteltable" table
+                                */
+                            
 							}                
 					});
                 
@@ -658,18 +672,77 @@ $(document).ready(function(){
 											bxslider_hotel_2.goToSlide(currentHotel1Index);
 										}
 
-										playBtnAction();
+										/*
+                                        * START
+                                        * function that replaces
+                                        * the player button
+                                        * with an iframe
+                                        */
+                                        bxsliderPlayBtnAxn();
+                                        /*
+                                        * END
+                                        * function that replaces
+                                        * the player button
+                                        * with an iframe
+                                        */
+                                    
+                                        /*
+                                        * START
+                                        * function that controls
+                                        * the behaviour of
+                                        * the player buttons
+                                        * on the "hoteltable" table
+                                        */
+                                        tableScrollUpBtnAxn();
+                                        /*
+                                        * END
+                                        * function that controls
+                                        * the behaviour of
+                                        * the player buttons
+                                        * on the "hoteltable" table
+                                        */
+                                    
 									},
 								onSlideAfter: function($slideElement, oldIndex, newIndex){
 									returnPlayButton();    
-									playBtnAction();
-									currentHotel1Index = newIndex;
-									bxslider_hotel_2.goToSlide(newIndex);
-									lengIncrement = 0;
-									doProgressBar();
+                                    currentHotel1Index = newIndex;
+                                    bxslider_hotel_2.goToSlide(newIndex);
+                                    doProgressBar();
+                                    
 									$slideElement.click(function(){
 										lengIncrement = 0;
-									}); 
+									});
+                                    
+                                    /*
+                                    * START
+                                    * function that replaces
+                                    * the player button
+                                    * with an iframe
+                                    */
+                                    bxsliderPlayBtnAxn();
+                                    /*
+                                    * END
+                                    * function that replaces
+                                    * the player button
+                                    * with an iframe
+                                    */
+
+                                    /*
+                                    * START
+                                    * function that controls
+                                    * the behaviour of
+                                    * the player buttons
+                                    * on the "hoteltable" table
+                                    */
+                                    tableScrollUpBtnAxn();
+                                    /*
+                                    * END
+                                    * function that controls
+                                    * the behaviour of
+                                    * the player buttons
+                                    * on the "hoteltable" table
+                                    */
+                                    
 								}                        
 							});
 
@@ -740,18 +813,76 @@ $(document).ready(function(){
 											bxslider_hotel_2.goToSlide(currentHotel1Index);
 										}
 
-										playBtnAction();
+										/*
+                                        * START
+                                        * function that replaces
+                                        * the player button
+                                        * with an iframe
+                                        */
+                                        bxsliderPlayBtnAxn();
+                                        /*
+                                        * END
+                                        * function that replaces
+                                        * the player button
+                                        * with an iframe
+                                        */
+
+                                        /*
+                                        * START
+                                        * function that controls
+                                        * the behaviour of
+                                        * the player buttons
+                                        * on the "hoteltable" table
+                                        */
+                                        tableScrollUpBtnAxn();
+                                        /*
+                                        * END
+                                        * function that controls
+                                        * the behaviour of
+                                        * the player buttons
+                                        * on the "hoteltable" table
+                                        */
 									},
 								onSlideAfter: function($slideElement, oldIndex, newIndex){
 										returnPlayButton();    
-										playBtnAction();
-										currentHotel1Index = newIndex;
-										bxslider_hotel_2.goToSlide(newIndex);
-										lengIncrement = 0;
-										doProgressBar();
+                                        currentHotel1Index = newIndex;
+                                        bxslider_hotel_2.goToSlide(newIndex);
+                                        doProgressBar();
+                                    
 										$slideElement.click(function(){
 											lengIncrement = 0;
 										});
+                                    
+                                        /*
+                                        * START
+                                        * function that replaces
+                                        * the player button
+                                        * with an iframe
+                                        */
+                                        bxsliderPlayBtnAxn();
+                                        /*
+                                        * END
+                                        * function that replaces
+                                        * the player button
+                                        * with an iframe
+                                        */
+
+                                        /*
+                                        * START
+                                        * function that controls
+                                        * the behaviour of
+                                        * the player buttons
+                                        * on the "hoteltable" table
+                                        */
+                                        tableScrollUpBtnAxn();
+                                        /*
+                                        * END
+                                        * function that controls
+                                        * the behaviour of
+                                        * the player buttons
+                                        * on the "hoteltable" table
+                                        */
+                                    
 									}                         
 							}); 
 							
@@ -761,7 +892,7 @@ $(document).ready(function(){
 				}, 500, 'hotel-1-slide-resize');
 			});
 		});
-    
+        
 		/*
 		* END
 		* function that executes
@@ -769,6 +900,20 @@ $(document).ready(function(){
 		* of the "hoteltable" table element
 		*/
 	}
+    
+    /*
+    * START
+    * function that populates
+    * the hotel-1 slider
+    * based on browser width
+    */
+    
+    /*
+    * END
+    * function that populates
+    * the hotel-1 slider
+    * based on browser width
+    */
     
     
     /*
@@ -817,13 +962,17 @@ $(document).ready(function(){
     * the player button
     * with an iframe
     */
-	$('#hotel-1 .play-button').click(function(){
+	function bxsliderPlayBtnAxn(){
+        
+        $('#hotel-1 .play-button').click(function() {
 
-		clearAllIntervals();
-		paused = true;
-		var video_id = $(this).parent('div').data('video_id');
-		$(this).replaceWith('<iframe id="ytplayer" type="text/html" width="100%" height="100%" src="http://www.youtube.com/embed/' + video_id + '?autoplay=1&rel=0&controls=2&rel=0 frameborder="0"/>');
-	});
+            clearAllIntervals();
+            paused = true;
+            var video_id = $(this).parent('div').data('video_id');
+            $(this).replaceWith('<iframe id="ytplayer" type="text/html" width="100%" height="100%" src="http://www.youtube.com/embed/' + video_id + '?autoplay=1&rel=0&controls=2&rel=0 frameborder="0"/>');
+        
+        });
+    }
     /*
     * END
     * function that replaces
@@ -851,6 +1000,41 @@ $(document).ready(function(){
     * function that replaces
     * any iframes
     * with a player button
+    */
+    
+    /*
+    * START
+    * function that controls
+    * the behaviour of
+    * the player buttons
+    * on the "hoteltable" table
+    */
+    
+   
+    
+    function tableScrollUpBtnAxn(){
+        $('#hoteltable .scrollUp-button').click(function(){
+            var tableScrollUpBtn = $(this);
+            var hotel1IndexPos = (tableScrollUpBtn.data('index_position') - 1);
+            
+            //make the hotel-1 bxslider
+            //move to specified index position
+            bxslider_hotel_1.goToSlide(hotel1IndexPos);
+            
+            //animate the document
+            //to scroll up
+            //to the hotel-1 slider
+            $('html, body').animate({
+                scrollTop: $('#hotel-1-container').offset().top 
+            },10);
+        });
+    }
+    /*
+    * END
+    * function that controls
+    * the behaviour of
+    * the player buttons
+    * on the "hoteltable" table
     */
 
 });
