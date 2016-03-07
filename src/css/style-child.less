@@ -150,12 +150,29 @@
 .hotel-1-slide{
     position: relative;
     
+    button.toggle-info{
+        position: absolute;
+        top: 0;
+        display: inline-block;
+        .show-info{
+            z-index: 30;
+        }
+        .hide-info{
+            z-index: 20;
+        }
+    }
+    
     .hotel-1-slide-overlay-player{
         position: absolute;
         top: 0;
         width: 100%;
-        z-index: 4;
+        z-index: 10;
     }
+}
+
+//styles for the description list
+#hoteldesclist li {
+    display: none;
 }
 
 //styles for the table
@@ -165,7 +182,7 @@
         width: 120px;
         height: 90px;
         
-        .play-button{
+        .scrollUp-button{
             position:absolute;
             top: 0;
         }
@@ -178,7 +195,7 @@
         width: 200px;
         height: 112px;
         
-        .scrollUp -button{
+        .scrollUp-button{
             position:absolute;
             top: 0;
         }

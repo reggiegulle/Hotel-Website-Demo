@@ -172,38 +172,12 @@ $(document).ready(function () {
     * of the "hoteltable" table element
 	* if yesIE === false
     */
-    
     if (yesIE === false) {
 		
 		hoteltable.on('draw.dt',function(){
         
 			clearAllIntervals();
-			
-			/* START
-			* add play buttons to each table thumbnail
-			*/
-			//instantiate a variable
-			//that increments by one
-			//per iteration
-			var hotel_1_index_position = 0;
-			
-			//add play buttons to each table thumbnail
-			$('#hoteltable tbody tr div.table-thumb').each(function(){
-				var table_thumb = $(this);
-				
-				//per row iteration,
-				//increment index_position by 1
-				hotel_1_index_position++;
-				
-				if( table_thumb.children('.scrollUp-button').length > 0 ){
-					table_thumb.children('.scrollUp-button').remove();
-				}
-				table_thumb.append('<div class="scrollUp-button" data-index_position="' + hotel_1_index_position + '">Scroll Up</div>'); 
-			});
-			/* END
-			* add play buttons to each table thumbnail
-			*/
-                   
+            
 			//remove items from upper bxslider ("ul hotel-1")
 			//and lower bxslider ("ul hotel-2")
 			//right after each rendering of the table
@@ -341,40 +315,18 @@ $(document).ready(function () {
 					
 				} else if ($('#hoteltable tbody tr td.dataTables_empty').length < 1 ) {
 				
-					$('#hoteltable tbody tr').each(function(){
-						var thisRow = $(this);
-						//get the data (json data source) from each row
-						rowData = hoteltable.row(thisRow).data();
-
-						//add the relevant data to bxslider hotel-1
-						//one list item at a time
-						if (typeof(rowData) != 'undefined'){
-							var hotel_1_li_item = '<li>';
-								hotel_1_li_item += '<div class="hotel-1-slide">';
-								//use the "medium" jpg for screen sizes above 640px
-									hotel_1_li_item += '<img src="images/' + rowData.image.src + '-medium.jpg" width="100%" height="100%" alt="' + rowData.image.src + '"/>';
-									hotel_1_li_item += '<div class="hotel-1-slide-overlay-player" data-video_id="' + rowData.image.video_id + '">';
-										hotel_1_li_item += '<button class="play-button">';
-											hotel_1_li_item += 'Play Video';
-										hotel_1_li_item += '</button>';
-									hotel_1_li_item += '</div>';
-								hotel_1_li_item += '</div>';
-							hotel_1_li_item += '</li>';
-							$('#hotel-1').append(hotel_1_li_item);
-						}
-					});
+					populateHotel1('medium');
 
 					//reload the bxslider
 					bxslider_hotel_1.reloadSlider({
 						mode: 'fade',
 						pager: false,
-						onSliderLoad: function(currentIndex){
+						onSliderLoad: function () {
 
 								//if window width is greater than 640 pixels
 								//make the overlay occupy only about half
 								//of the area of the slide div
 								//with slight margins
-
 								setOverlayCss('large');
 
 								doProgressBar();
@@ -389,8 +341,22 @@ $(document).ready(function () {
 									bxslider_hotel_2.goToSlide(0);
 									lengIncrement = 0;
 								});
-							
-								/*
+                                
+                                /*
+                                * START
+                                * function for
+                                * the behaviour of
+                                * the "show info" and "hide info" buttons
+                                */
+                                toggleInfo();
+                                /*
+                                * END
+                                * function for
+                                * the behaviour of
+                                * the "show info" and "hide info" buttons
+                                */
+                            
+                                /*
 								* START
 								* function that replaces
 								* the player button
@@ -421,6 +387,21 @@ $(document).ready(function () {
                                 */
                             
 							},
+                        onSlideBefore: function () {
+                                /*
+                                * START
+                                * functions for
+                                * the behaviour of
+                                * the "show info" and "hide info" buttons
+                                */
+                                restoreInfoBtnToggle();
+                                /*
+                                * END
+                                * functions for
+                                * the behaviour of
+                                * the "show info" and "hide info" buttons
+                                */
+                            },
 						onSlideAfter: function ($slideElement, oldIndex, newIndex) {
 								returnPlayButton();    
 								currentHotel1Index = newIndex;
@@ -475,29 +456,8 @@ $(document).ready(function () {
                 
 				} else if ($('#hoteltable tbody tr td.dataTables_empty').length < 1 ) {
                 
-					$('#hoteltable tbody tr').each(function(){
-						var thisRow = $(this);
-						//get the data (json data source) from each row
-						rowData = hoteltable.row(thisRow).data();
-
-						//add the relevant data to bxslider hotel-1
-						//one list item at a time
-						if (typeof(rowData) != 'undefined'){
-							var hotel_1_li_item = '<li>';
-								hotel_1_li_item += '<div class="hotel-1-slide">';
-								//use the "mobile" jpg for screen sizes equal to or less than 640px
-									hotel_1_li_item += '<img src="images/' + rowData.image.src + '-mobile.jpg" width="100%" height="100%" alt="' + rowData.image.src + '"/>';
-									hotel_1_li_item += '<div class="hotel-1-slide-overlay-player" data-video_id="' + rowData.image.video_id + '">';
-										hotel_1_li_item += '<button class="play-button">';
-											hotel_1_li_item += 'Play Video';
-										hotel_1_li_item += '</button>';
-									hotel_1_li_item += '</div>';
-								hotel_1_li_item += '</div>';
-							hotel_1_li_item += '</li>';
-							$('#hotel-1').append(hotel_1_li_item);
-						}
-					});
-
+					populateHotel1('mobile');
+                    
 					//reload the bxslider
 					bxslider_hotel_1.reloadSlider({
 						mode: 'fade',
@@ -514,11 +474,24 @@ $(document).ready(function () {
 								$('#hotel-2-container a.bx-prev, #hotel-2-container a.bx-next').on('mouseout', function(){
 									paused = false;
 								});
-                            
 								$('#hotel-1 li:eq(0)').click(function(){
 									bxslider_hotel_2.goToSlide(0);
 									lengIncrement = 0;
 								});
+                            
+                                /*
+                                * START
+                                * function for
+                                * the behaviour of
+                                * the "show info" and "hide info" buttons
+                                */
+                                toggleInfo();
+                                /*
+                                * END
+                                * function for
+                                * the behaviour of
+                                * the "show info" and "hide info" buttons
+                                */
 								
 								/*
 								* START
@@ -551,6 +524,21 @@ $(document).ready(function () {
                                 */
 							
 							},
+                        onSlideBefore: function () {
+                                /*
+                                * START
+                                * functions for
+                                * the behaviour of
+                                * the "show info" and "hide info" buttons
+                                */
+                                restoreInfoBtnToggle();
+                                /*
+                                * END
+                                * functions for
+                                * the behaviour of
+                                * the "show info" and "hide info" buttons
+                                */
+                            },
 						onSlideAfter: function($slideElement, oldIndex, newIndex){
 								returnPlayButton();    
 								currentHotel1Index = newIndex;
@@ -621,36 +609,33 @@ $(document).ready(function () {
 
 						} else if ($('#hoteltable tbody tr td.dataTables_empty').length < 1 ) {
 
-							$('#hoteltable tbody tr').each(function(){
-								var thisRow = $(this);
-								//get the data (json data source) from each row
-								rowData = hoteltable.row(thisRow).data();
-
-								//add the relevant data to bxslider hotel-1
-								//one list item at a time
-								if (typeof(rowData) != 'undefined'){
-									var hotel_1_li_item = '<li>';
-										hotel_1_li_item += '<div class="hotel-1-slide">';
-										//use the "medium" jpg for screen sizes above 640px
-											hotel_1_li_item += '<img src="images/' + rowData.image.src + '-medium.jpg" width="100%" height="100%" alt="' + rowData.image.src + '" />';
-											hotel_1_li_item += '<div class="hotel-1-slide-overlay-player" data-video_id="' + rowData.image.video_id + '">';
-												hotel_1_li_item += '<button class="play-button">';
-													hotel_1_li_item += 'Play Video';
-												hotel_1_li_item += '</button>';
-											hotel_1_li_item += '</div>';
-										hotel_1_li_item += '</div>';
-									hotel_1_li_item += '</li>';
-									$('#hotel-1').append(hotel_1_li_item);
-								}
-							});
+							populateHotel1('medium');
 
 							//reload the bxslider
 							bxslider_hotel_1.reloadSlider({
 								mode: 'fade',
 								pager: false,
-								onSliderLoad: function(){
-
+								onSliderLoad: function () {
+                                    
+                                        //if window width is greater than 640 pixels
+								        //make the overlay occupy only about half
+								        //of the area of the slide div
+								        //with slight margins
 										setOverlayCss('large');
+                                    
+                                        /*
+                                        * START
+                                        * functions for
+                                        * the behaviour of
+                                        * the "show info" and "hide info" buttons
+                                        */
+                                        restoreInfoBtnToggle();
+                                        /*
+                                        * END
+                                        * functions for
+                                        * the behaviour of
+                                        * the "show info" and "hide info" buttons
+                                        */
 
 										doProgressBar();
 
@@ -667,10 +652,24 @@ $(document).ready(function () {
 												bxslider_hotel_2.goToSlide(0);
 												lengIncrement = 0;
 											});
-										} else if (currentHotel1Index >= 1){
-											bxslider_hotel_1.goToSlide(currentHotel1Index);
+										} else if (currentHotel1Index >= 1){	     
+                                            bxslider_hotel_1.goToSlide(currentHotel1Index);
 											bxslider_hotel_2.goToSlide(currentHotel1Index);
 										}
+                                    
+                                        /*
+                                        * START
+                                        * function for
+                                        * the behaviour of
+                                        * the "show info" and "hide info" buttons
+                                        */
+                                        toggleInfo();
+                                        /*
+                                        * END
+                                        * function for
+                                        * the behaviour of
+                                        * the "show info" and "hide info" buttons
+                                        */
 
 										/*
                                         * START
@@ -703,6 +702,21 @@ $(document).ready(function () {
                                         */
                                     
 									},
+                                onSlideBefore: function () {
+                                        /*
+                                        * START
+                                        * functions for
+                                        * the behaviour of
+                                        * the "show info" and "hide info" buttons
+                                        */
+                                        restoreInfoBtnToggle();
+                                        /*
+                                        * END
+                                        * functions for
+                                        * the behaviour of
+                                        * the "show info" and "hide info" buttons
+                                        */
+                                    },   
 								onSlideAfter: function($slideElement, oldIndex, newIndex){
 									returnPlayButton();    
                                     currentHotel1Index = newIndex;
@@ -762,28 +776,7 @@ $(document).ready(function () {
 							
 						} else if ($('#hoteltable tbody tr td.dataTables_empty').length < 1 ) {
 							
-							$('#hoteltable tbody tr').each(function(){
-								var thisRow = $(this);
-								//get the data (json data source) from each row
-								rowData = hoteltable.row(thisRow).data();
-
-								//add the relevant data to bxslider hotel-1
-								//one list item at a time
-								if (typeof(rowData) != 'undefined'){
-									var hotel_1_li_item = '<li>';
-										hotel_1_li_item += '<div class="hotel-1-slide">';
-										//use the "mobile" jpg for screen sizes equal to or less than 640px
-											hotel_1_li_item += '<img src="images/' + rowData.image.src + '-mobile.jpg" width="100%" height="100%" alt="' + rowData.image.src + '" />';
-											hotel_1_li_item += '<div class="hotel-1-slide-overlay-player" data-video_id="' + rowData.image.video_id + '">';
-												hotel_1_li_item += '<button class="play-button">';
-													hotel_1_li_item += 'Play Video';
-												hotel_1_li_item += '</button>';
-											hotel_1_li_item += '</div>';
-										hotel_1_li_item += '</div>';
-									hotel_1_li_item += '</li>';
-									$('#hotel-1').append(hotel_1_li_item);
-								}
-							});
+							populateHotel1('mobile');
 
 							//reload the bxslider
 							bxslider_hotel_1.reloadSlider({
@@ -791,7 +784,21 @@ $(document).ready(function () {
 								pager: false,
 								onSliderLoad: function(){
 
-										setOverlayCss('small');    
+										setOverlayCss('small');
+                                    
+                                        /*
+                                        * START
+                                        * functions for
+                                        * the behaviour of
+                                        * the "show info" and "hide info" buttons
+                                        */
+                                        restoreInfoBtnToggle();
+                                        /*
+                                        * END
+                                        * functions for
+                                        * the behaviour of
+                                        * the "show info" and "hide info" buttons
+                                        */
 
 										doProgressBar();
 
@@ -812,6 +819,20 @@ $(document).ready(function () {
 											bxslider_hotel_1.goToSlide(currentHotel1Index);
 											bxslider_hotel_2.goToSlide(currentHotel1Index);
 										}
+                                    
+                                        /*
+                                        * START
+                                        * function for
+                                        * the behaviour of
+                                        * the "show info" and "hide info" buttons
+                                        */
+                                        toggleInfo();
+                                        /*
+                                        * END
+                                        * function for
+                                        * the behaviour of
+                                        * the "show info" and "hide info" buttons
+                                        */
 
 										/*
                                         * START
@@ -843,6 +864,21 @@ $(document).ready(function () {
                                         * on the "hoteltable" table
                                         */
 									},
+                                onSlideBefore: function () {
+                                        /*
+                                        * START
+                                        * functions for
+                                        * the behaviour of
+                                        * the "show info" and "hide info" buttons
+                                        */
+                                        restoreInfoBtnToggle();
+                                        /*
+                                        * END
+                                        * functions for
+                                        * the behaviour of
+                                        * the "show info" and "hide info" buttons
+                                        */
+                                    },
 								onSlideAfter: function($slideElement, oldIndex, newIndex){
 										returnPlayButton();    
                                         currentHotel1Index = newIndex;
@@ -900,6 +936,13 @@ $(document).ready(function () {
 		* of the "hoteltable" table element
 		*/
 	}
+    /*
+    * END
+    * function that executes
+    * after each rendering
+    * of the "hoteltable" table element
+	* if yesIE === false
+    */
     
     /*
     * START
@@ -907,6 +950,81 @@ $(document).ready(function () {
     * the hotel-1 slider
     * based on browser width
     */
+    
+    function populateHotel1 (width) {
+        
+        switch (width) {
+            
+            case 'medium':  var infoIndex = 0;
+                
+                            while ($('#mobile-info-buttons-container button').length > 0) {
+                                $('#mobile-info-buttons-container button').remove();
+                            }
+                            
+                            $('#hoteltable tbody tr').each(function(){
+                                var thisRow = $(this);
+                                //get the data (json data source) from each row
+                                rowData = hoteltable.row(thisRow).data();
+                                
+                                //add the relevant data to bxslider hotel-1
+                                //one list item at a time
+                                if (typeof(rowData) != 'undefined'){
+                                    
+                                    infoIndex++;
+                                    
+                                    var hotel_1_li_item = '<li>';
+                                        hotel_1_li_item += '<div class="hotel-1-slide">';
+                                            //add a "more info" button
+                                            hotel_1_li_item += '<button class="toggle-info show-info" data-info_index="' + infoIndex + '">Show Info</button>';
+                                            hotel_1_li_item += '<button class="toggle-info hide-info" data-info_index="' + infoIndex + '">Hide Info</button>';
+                                            //use the "medium" jpg for screen sizes above 640px
+                                            hotel_1_li_item += '<img src="images/' + rowData.image.src + '-medium.jpg" width="100%" height="100%" alt="' + rowData.image.src + '"/>';
+                                                hotel_1_li_item += '<div class="hotel-1-slide-overlay-player" data-video_id="' + rowData.image.video_id + '">';
+                                                    hotel_1_li_item += '<button class="play-button">';
+                                                    hotel_1_li_item += 'Play Video';
+                                                    hotel_1_li_item += '</button>';
+                                                hotel_1_li_item += '</div>';
+                                        hotel_1_li_item += '</div>';
+                                    hotel_1_li_item += '</li>';
+                                    $('#hotel-1').append(hotel_1_li_item);
+                                }
+                            });
+            break;
+            case 'mobile':  var infoIndex = 0;  
+                
+                            $('#hoteltable tbody tr').each(function(){
+                                var thisRow = $(this);
+                                //get the data (json data source) from each row
+                                rowData = hoteltable.row(thisRow).data();
+
+                                //add the relevant data to bxslider hotel-1
+                                //one list item at a time
+                                if (typeof(rowData) != 'undefined'){
+                                    
+                                    infoIndex++;
+                                    
+                                    var hotel_1_li_item = '<li>';
+                                        hotel_1_li_item += '<div class="hotel-1-slide">';
+                                            //add a "more info" button
+                                            hotel_1_li_item += '<button class="toggle-info show-info" data-info_index="' + infoIndex + '">Show Info</button>';
+                                            hotel_1_li_item += '<button class="toggle-info hide-info" data-info_index="' + infoIndex + '">Hide Info</button>';
+                                            //use the "mobile" jpg for screen sizes equal to or less than 640px
+                                            hotel_1_li_item += '<img src="images/' + rowData.image.src + '-mobile.jpg" width="100%" height="100%" alt="' + rowData.image.src + '"/>';
+                                                hotel_1_li_item += '<div class="hotel-1-slide-overlay-player" data-video_id="' + rowData.image.video_id + '">';
+                                                    hotel_1_li_item += '<button class="play-button">';
+                                                        hotel_1_li_item += 'Play Video';
+                                                    hotel_1_li_item += '</button>';
+                                                hotel_1_li_item += '</div>';
+                                        hotel_1_li_item += '</div>';
+                                    hotel_1_li_item += '</li>';
+                                    $('#hotel-1').append(hotel_1_li_item);
+                                }
+                            });
+            break;
+            default:
+            break;
+        }
+    }
     
     /*
     * END
@@ -953,6 +1071,62 @@ $(document).ready(function () {
     * function that sets the styling
     * of the slide overlay player
     */
+    
+    /*
+    * START
+    * functions for
+    * the behaviour of
+    * the "show info" and "hide info" buttons
+    */
+    
+    function toggleInfo(){
+        
+        $('#hotel-1 .hide-info').hide();
+        
+        var btnIndex;
+        
+        $('#hotel-1 .show-info').click(function () {
+            
+            clearAllIntervals();
+            paused = true;
+            
+            btnIndex = ($(this).data('info_index') - 1);
+        
+            $('#hoteldesclist li').eq(btnIndex).show();
+            
+            $(this).hide();
+            
+            $(this).siblings('.hide-info').show();
+        
+        });
+        
+        $('#hotel-1 .hide-info').click(function () {
+            
+            btnIndex = ($(this).data('info_index') - 1);
+        
+            $('#hoteldesclist li').eq(btnIndex).hide();
+            
+            $(this).hide();
+            
+            $(this).siblings('.show-info').show();
+        
+        });
+    }
+    
+    function restoreInfoBtnToggle(){
+        $('#hoteldesclist li').filter(':visible').hide();
+        $('#hotel-1 .toggle-info.hide-info').filter(':visible').hide();
+        $('#hotel-1 .toggle-info.show-info').filter(':hidden').show();
+    }
+    
+    /*
+    * END
+    * functions for
+    * the behaviour of
+    * the "show info" and "hide info" buttons
+    */
+    
+    
     
     
     

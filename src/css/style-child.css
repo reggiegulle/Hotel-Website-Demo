@@ -138,11 +138,25 @@
 .hotel-1-slide {
   position: relative;
 }
+.hotel-1-slide button.toggle-info {
+  position: absolute;
+  top: 0;
+  display: inline-block;
+}
+.hotel-1-slide button.toggle-info .show-info {
+  z-index: 30;
+}
+.hotel-1-slide button.toggle-info .hide-info {
+  z-index: 20;
+}
 .hotel-1-slide .hotel-1-slide-overlay-player {
   position: absolute;
   top: 0;
   width: 100%;
-  z-index: 4;
+  z-index: 10;
+}
+#hoteldesclist li {
+  display: none;
 }
 @media screen and (max-width: 480px) {
   div.table-thumb {
@@ -150,7 +164,7 @@
     width: 120px;
     height: 90px;
   }
-  div.table-thumb .play-button {
+  div.table-thumb .scrollUp-button {
     position: absolute;
     top: 0;
   }
