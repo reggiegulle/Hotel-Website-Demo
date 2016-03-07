@@ -150,17 +150,33 @@
 .hotel-1-slide{
     position: relative;
     
-    button.toggle-info{
-        position: absolute;
-        top: 0;
-        display: inline-block;
-        .show-info{
-            z-index: 30;
-        }
-        .hide-info{
-            z-index: 20;
+    @media screen and (max-width: 640px){
+        button.toggle-info{
+            position: relative;
+            display: inline-block;
+            .show-info{
+                z-index: 30;
+            }
+            .hide-info{
+                z-index: 20;
+            }
         }
     }
+    
+    @media screen and (min-width: 641px){
+        button.toggle-info{
+            position: absolute;
+            top: 0;
+            display: inline-block;
+            .show-info{
+                z-index: 30;
+            }
+            .hide-info{
+                z-index: 20;
+            }
+        }
+    }
+   
     
     .hotel-1-slide-overlay-player{
         position: absolute;

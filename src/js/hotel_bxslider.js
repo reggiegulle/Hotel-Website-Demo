@@ -956,10 +956,6 @@ $(document).ready(function () {
         switch (width) {
             
             case 'medium':  var infoIndex = 0;
-                
-                            while ($('#mobile-info-buttons-container button').length > 0) {
-                                $('#mobile-info-buttons-container button').remove();
-                            }
                             
                             $('#hoteltable tbody tr').each(function(){
                                 var thisRow = $(this);
@@ -1005,9 +1001,6 @@ $(document).ready(function () {
                                     
                                     var hotel_1_li_item = '<li>';
                                         hotel_1_li_item += '<div class="hotel-1-slide">';
-                                            //add a "more info" button
-                                            hotel_1_li_item += '<button class="toggle-info show-info" data-info_index="' + infoIndex + '">Show Info</button>';
-                                            hotel_1_li_item += '<button class="toggle-info hide-info" data-info_index="' + infoIndex + '">Hide Info</button>';
                                             //use the "mobile" jpg for screen sizes equal to or less than 640px
                                             hotel_1_li_item += '<img src="images/' + rowData.image.src + '-mobile.jpg" width="100%" height="100%" alt="' + rowData.image.src + '"/>';
                                                 hotel_1_li_item += '<div class="hotel-1-slide-overlay-player" data-video_id="' + rowData.image.video_id + '">';
@@ -1015,7 +1008,10 @@ $(document).ready(function () {
                                                         hotel_1_li_item += 'Play Video';
                                                     hotel_1_li_item += '</button>';
                                                 hotel_1_li_item += '</div>';
+                                                hotel_1_li_item += '<button class="toggle-info show-info" data-info_index="' + infoIndex + '">Show Info</button>';
+                                                hotel_1_li_item += '<button class="toggle-info hide-info" data-info_index="' + infoIndex + '">Hide Info</button>';
                                         hotel_1_li_item += '</div>';
+                                        //add a "more info" button
                                     hotel_1_li_item += '</li>';
                                     $('#hotel-1').append(hotel_1_li_item);
                                 }

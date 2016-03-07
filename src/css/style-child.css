@@ -138,16 +138,30 @@
 .hotel-1-slide {
   position: relative;
 }
-.hotel-1-slide button.toggle-info {
-  position: absolute;
-  top: 0;
-  display: inline-block;
+@media screen and (max-width: 640px) {
+  .hotel-1-slide button.toggle-info {
+    position: relative;
+    display: inline-block;
+  }
+  .hotel-1-slide button.toggle-info .show-info {
+    z-index: 30;
+  }
+  .hotel-1-slide button.toggle-info .hide-info {
+    z-index: 20;
+  }
 }
-.hotel-1-slide button.toggle-info .show-info {
-  z-index: 30;
-}
-.hotel-1-slide button.toggle-info .hide-info {
-  z-index: 20;
+@media screen and (min-width: 641px) {
+  .hotel-1-slide button.toggle-info {
+    position: absolute;
+    top: 0;
+    display: inline-block;
+  }
+  .hotel-1-slide button.toggle-info .show-info {
+    z-index: 30;
+  }
+  .hotel-1-slide button.toggle-info .hide-info {
+    z-index: 20;
+  }
 }
 .hotel-1-slide .hotel-1-slide-overlay-player {
   position: absolute;
