@@ -122,6 +122,9 @@
 .bx-wrapper .bx-next {
   background: url('../images/controls.png') no-repeat -43px -32px;
 }
+.bx-wrapper .bx-loading {
+  background: url('../images/bx_loader.gif') center center no-repeat #ffffff;
+}
 #progressLine {
   background: #fff;
   width: 100%;
@@ -135,22 +138,66 @@
 .hotel-1-slide {
   position: relative;
 }
+@media screen and (max-width: 640px) {
+  .hotel-1-slide button.toggle-info {
+    position: relative;
+    display: inline-block;
+  }
+  .hotel-1-slide button.toggle-info .show-info {
+    z-index: 30;
+  }
+  .hotel-1-slide button.toggle-info .hide-info {
+    z-index: 20;
+  }
+}
+@media screen and (min-width: 641px) {
+  .hotel-1-slide button.toggle-info {
+    position: absolute;
+    top: 0;
+    display: inline-block;
+  }
+  .hotel-1-slide button.toggle-info .show-info {
+    z-index: 30;
+  }
+  .hotel-1-slide button.toggle-info .hide-info {
+    z-index: 20;
+  }
+}
 .hotel-1-slide .hotel-1-slide-overlay-player {
   position: absolute;
   top: 0;
-  left: 0;
   width: 100%;
-  z-index: 4;
+  z-index: 10;
+}
+.slick-prev {
+  left: 10px;
+  z-index: 20;
+}
+.slick-next {
+  right: 10px;
+}
+#hoteldesclist li {
+  display: none;
 }
 @media screen and (max-width: 480px) {
   div.table-thumb {
+    position: relative;
     width: 120px;
     height: 90px;
+  }
+  div.table-thumb .scrollUp-button {
+    position: absolute;
+    top: 0;
   }
 }
 @media screen and (min-width: 481px) {
   div.table-thumb {
+    position: relative;
     width: 200px;
     height: 112px;
+  }
+  div.table-thumb .scrollUp-button {
+    position: absolute;
+    top: 0;
   }
 }

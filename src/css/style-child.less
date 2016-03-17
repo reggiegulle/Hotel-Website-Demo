@@ -128,10 +128,12 @@
     .bx-next{
         background: url('@{images}/controls.png') no-repeat -43px -32px;
     }
+    .bx-loading {
+        background: url('@{images}/bx_loader.gif') center center no-repeat #ffffff;
+    }
 }
 
 //styles for hotel-1-bxslider
-
 #progressLine{
     background: #fff;
     width: 100%;
@@ -147,26 +149,85 @@
 .hotel-1-slide{
     position: relative;
     
+    @media screen and (max-width: 640px){
+        button.toggle-info{
+            position: relative;
+            display: inline-block;
+            .show-info{
+                z-index: 30;
+            }
+            .hide-info{
+                z-index: 20;
+            }
+        }
+    }
+    
+    @media screen and (min-width: 641px){
+        button.toggle-info{
+            position: absolute;
+            top: 0;
+            display: inline-block;
+            .show-info{
+                z-index: 30;
+            }
+            .hide-info{
+                z-index: 20;
+            }
+        }
+    }
+   
+    
     .hotel-1-slide-overlay-player{
         position: absolute;
         top: 0;
-        left: 0;
         width: 100%;
-        z-index: 4;
+        z-index: 10;
     }
+}
+
+
+//styles for the IE slick carousel
+
+//slick carousel controls
+.slick-prev {
+    left: 10px;
+    z-index: 20;
+}
+
+.slick-next {
+    right: 10px;
+}
+
+
+
+//styles for the description list
+#hoteldesclist li {
+    display: none;
 }
 
 //styles for the table
 @media screen and (max-width: 480px){
     div.table-thumb{
+        position: relative;
         width: 120px;
         height: 90px;
+        
+        .scrollUp-button{
+            position:absolute;
+            top: 0;
+        }
     }
 }
 
 @media screen and (min-width: 481px){
     div.table-thumb{
+        position: relative;
         width: 200px;
         height: 112px;
+        
+        .scrollUp-button{
+            position:absolute;
+            top: 0;
+        }
     }
 }

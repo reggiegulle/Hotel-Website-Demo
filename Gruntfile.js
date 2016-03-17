@@ -9,7 +9,8 @@ module.exports = function(grunt) {
                 {src:'bower_components/bootstrap/dist/css/bootstrap-theme.css' , dest: 'src/css/bootstrap-theme.css'},
                 {src:'bower_components/datatables.net-dt/css/jquery.dataTables.css' , dest: 'src/css/jquery.dataTables.css'},
                 {src:'bower_components/datatables.net-responsive-dt/css/responsive.dataTables.css' , dest: 'src/css/responsive.dataTables.css'},
-                {src:'bower_components/bxslider-4/dist/jquery.bxslider.css' , dest: 'src/css/jquery.bxslider.css'}
+                {src:'bower_components/slick-carousel/slick/slick.css' , dest: 'src/css/slick.css'},
+                {src:'bower_components/slick-carousel/slick/slick-theme.css' , dest: 'src/css/slick-theme.css'}
             ]
         },
         bootstrap_fonts_src: {
@@ -52,23 +53,43 @@ module.exports = function(grunt) {
                 }
             ]
         },
-        bxslider_images_src: {
+        slick_loader_src: {
             files: [
                 {
                     expand: true,
-                    cwd: 'bower_components/bxslider-4/dist/images/',
-                    src: ['**.**'],
+                    cwd: 'bower_components/slick-carousel/slick/',
+                    src: ['ajax-loader.gif'],
                     dest: 'src/images/'
                 }
             ]
         },
-        bxslider_images_dest: {
+        slick_loader_dest: {
             files: [
                 {
                     expand: true,
-                    cwd: 'bower_components/bxslider-4/dist/images/',
-                    src: ['**.**'],
+                    cwd: 'bower_components/slick-carousel/slick/',
+                    src: ['ajax-loader.gif'],
                     dest: 'dest/images/'
+                }
+            ]
+        },
+        slick_fonts_src: {
+            files: [
+                {
+                    expand: true,
+                    cwd: 'bower_components/slick-carousel/slick/fonts/',
+                    src: ['**.**'],
+                    dest: 'src/fonts/'
+                }
+            ]
+        },
+        slick_fonts_src: {
+            files: [
+                {
+                    expand: true,
+                    cwd: 'bower_components/slick-carousel/slick/fonts/',
+                    src: ['**.**'],
+                    dest: 'dest/fonts/'
                 }
             ]
         },
