@@ -8,27 +8,8 @@ module.exports = function(grunt) {
                 {src:'bower_components/bootstrap/dist/css/bootstrap.css' , dest: 'src/css/bootstrap.css'},
                 {src:'bower_components/bootstrap/dist/css/bootstrap-theme.css' , dest: 'src/css/bootstrap-theme.css'},
                 {src:'bower_components/datatables.net-dt/css/jquery.dataTables.css' , dest: 'src/css/jquery.dataTables.css'},
-                {src:'bower_components/datatables.net-responsive-dt/css/responsive.dataTables.css' , dest: 'src/css/responsive.dataTables.css'}
-            ]
-        },
-        datatables_images_src: {
-            files: [
-                {
-                    expand: true,
-                    cwd: 'bower_components/datatables.net-dt/images/',
-                    src: ['**.**'],
-                    dest: 'src/images/'
-                }
-            ]
-        },
-        datatables_images_dest: {
-            files: [
-                {
-                    expand: true,
-                    cwd: 'bower_components/datatables.net-dt/images/',
-                    src: ['**.**'],
-                    dest: 'dest/images/'
-                }
+                {src:'bower_components/datatables.net-responsive-dt/css/responsive.dataTables.css' , dest: 'src/css/responsive.dataTables.css'},
+                {src:'bower_components/bxslider-4/dist/jquery.bxslider.css' , dest: 'src/css/jquery.bxslider.css'}
             ]
         },
         bootstrap_fonts_src: {
@@ -51,11 +32,52 @@ module.exports = function(grunt) {
                 }
             ]
         },
+        datatables_images_src: {
+            files: [
+                {
+                    expand: true,
+                    cwd: 'bower_components/datatables.net-dt/images/',
+                    src: ['**.**'],
+                    dest: 'src/images/'
+                }
+            ]
+        },
+        datatables_images_dest: {
+            files: [
+                {
+                    expand: true,
+                    cwd: 'bower_components/datatables.net-dt/images/',
+                    src: ['**.**'],
+                    dest: 'dest/images/'
+                }
+            ]
+        },
+        bxslider_images_src: {
+            files: [
+                {
+                    expand: true,
+                    cwd: 'bower_components/bxslider-4/dist/images/',
+                    src: ['**.**'],
+                    dest: 'src/images/'
+                }
+            ]
+        },
+        bxslider_images_dest: {
+            files: [
+                {
+                    expand: true,
+                    cwd: 'bower_components/bxslider-4/dist/images/',
+                    src: ['**.**'],
+                    dest: 'dest/images/'
+                }
+            ]
+        },
         javascript_files: {
              files: [
                 {src:'bower_components/bootstrap/dist/js/bootstrap.js' , dest: 'src/js/bootstrap.js'},
                 {src:'bower_components/datatables.net/js/jquery.dataTables.js', dest: 'src/js/jquery.dataTables.js'},
-                {src:'bower_components/datatables.net-responsive/js/datatables.responsive.js', dest: 'src/js/dataTables.responsive.js'}
+                {src:'bower_components/datatables.net-responsive/js/datatables.responsive.js', dest: 'src/js/dataTables.responsive.js'},
+                {src:'bower_components/bxslider-4/dist/jquery.bxslider.js', dest: 'src/js/jquery.bxslider.js'}
             ]    
         }   
     },
