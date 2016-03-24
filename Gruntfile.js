@@ -9,12 +9,9 @@ module.exports = function(grunt) {
                 {src:'bower_components/bootstrap/dist/css/bootstrap-theme.css' , dest: 'src/css/bootstrap-theme.css'},
                 {src:'bower_components/datatables.net-dt/css/jquery.dataTables.css' , dest: 'src/css/jquery.dataTables.css'},
                 {src:'bower_components/datatables.net-responsive-dt/css/responsive.dataTables.css' , dest: 'src/css/responsive.dataTables.css'},
-<<<<<<< HEAD
-                {src:'bower_components/bxslider-4/dist/jquery.bxslider.css' , dest: 'src/css/jquery.bxslider.css'}
-=======
+                {src:'bower_components/bxslider-4/dist/jquery.bxslider.css' , dest: 'src/css/jquery.bxslider.css'},
                 {src:'bower_components/slick-carousel/slick/slick.css' , dest: 'src/css/slick.css'},
                 {src:'bower_components/slick-carousel/slick/slick-theme.css' , dest: 'src/css/slick-theme.css'}
->>>>>>> refs/remotes/origin/slick
             ]
         },
         bootstrap_fonts_src: {
@@ -57,46 +54,46 @@ module.exports = function(grunt) {
                 }
             ]
         },
-<<<<<<< HEAD
         bxslider_images_src: {
             files: [
                 {
                     expand: true,
                     cwd: 'bower_components/bxslider-4/dist/images/',
                     src: ['**.**'],
-=======
-        slick_loader_src: {
-            files: [
-                {
-                    expand: true,
-                    cwd: 'bower_components/slick-carousel/slick/',
-                    src: ['ajax-loader.gif'],
->>>>>>> refs/remotes/origin/slick
                     dest: 'src/images/'
                 }
             ]
         },
-<<<<<<< HEAD
         bxslider_images_dest: {
             files: [
                 {
                     expand: true,
                     cwd: 'bower_components/bxslider-4/dist/images/',
                     src: ['**.**'],
-=======
+                    dest: 'dest/images/'
+                }
+            ]
+        },
+        slick_loader_src: {
+            files: [
+                {
+                    expand: true,
+                    cwd: 'bower_components/slick-carousel/slick/',
+                    src: ['ajax-loader.gif'],
+                    dest: 'src/images/'
+                }
+            ]
+        },
         slick_loader_dest: {
             files: [
                 {
                     expand: true,
                     cwd: 'bower_components/slick-carousel/slick/',
                     src: ['ajax-loader.gif'],
->>>>>>> refs/remotes/origin/slick
                     dest: 'dest/images/'
                 }
             ]
         },
-<<<<<<< HEAD
-=======
         slick_fonts_src: {
             files: [
                 {
@@ -107,7 +104,7 @@ module.exports = function(grunt) {
                 }
             ]
         },
-        slick_fonts_src: {
+        slick_fonts_dest: {
             files: [
                 {
                     expand: true,
@@ -117,13 +114,13 @@ module.exports = function(grunt) {
                 }
             ]
         },
->>>>>>> refs/remotes/origin/slick
         javascript_files: {
              files: [
                 {src:'bower_components/bootstrap/dist/js/bootstrap.js' , dest: 'src/js/bootstrap.js'},
                 {src:'bower_components/datatables.net/js/jquery.dataTables.js', dest: 'src/js/jquery.dataTables.js'},
                 {src:'bower_components/datatables.net-responsive/js/datatables.responsive.js', dest: 'src/js/dataTables.responsive.js'},
-                {src:'bower_components/bxslider-4/dist/jquery.bxslider.js', dest: 'src/js/jquery.bxslider.js'}
+                {src:'bower_components/bxslider-4/dist/jquery.bxslider.js', dest: 'src/js/jquery.bxslider.js'},
+                {src:'bower_components/slick-carousel/slick/slick.js', dest: 'src/js/slick.js'}
             ]    
         }   
     },
